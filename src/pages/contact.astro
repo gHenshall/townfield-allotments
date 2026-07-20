@@ -1,0 +1,468 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact" description="Get in touch with Townfield Allotments - plot enquiries and more">
+  <style>
+    .contact-section {
+      background-color: var(--white);
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact-info-boxes {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      color: var(--white);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+    }
+
+    .info-box h3 {
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-box p {
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.8;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-box strong {
+      color: var(--accent);
+    }
+
+    .contact-form {
+      background-color: var(--bg-light);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid var(--white);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+      background-color: var(--white);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(232, 168, 77, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-row .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: auto;
+      margin-right: 0.8rem;
+      cursor: pointer;
+    }
+
+    .checkbox-item label {
+      margin-bottom: 0;
+      font-weight: normal;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--accent);
+      color: var(--primary);
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .submit-btn:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(232, 168, 77, 0.3);
+    }
+
+    .quick-contact {
+      background-color: var(--bg-light);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 3rem;
+    }
+
+    .quick-contact h3 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      margin-top: 0;
+    }
+
+    .quick-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .method-card {
+      background-color: var(--white);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      border-left: 4px solid var(--accent);
+    }
+
+    .method-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .method-card h4 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .method-card p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .method-card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .method-card a:hover {
+      color: var(--accent-light);
+    }
+
+    .response-message {
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+
+    .response-message.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      display: block;
+    }
+
+    .response-message.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-methods {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <!-- Page Header -->
+  <section class="contact-section">
+    <div class="container">
+      <h2>Get in Touch</h2>
+      <p class="section-subtitle">Have questions? Ready to enquire about a plot? We'd love to hear from you</p>
+    </div>
+  </section>
+
+  <!-- Quick Contact Methods -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="quick-contact">
+        <h3>Quick Contact Methods</h3>
+        <div class="quick-methods">
+          <div class="method-card">
+            <div class="method-icon">📍</div>
+            <h4>Visit Us</h4>
+            <p>The site is open 24/7. Stop by anytime to see the allotments for yourself.</p>
+            <a href="/location">Get Directions →</a>
+          </div>
+          <div class="method-card">
+            <div class="method-icon">📋</div>
+            <h4>Use the Form</h4>
+            <p>Fill out the enquiry form below and we'll get back to you soon.</p>
+            <a href="#contact-form">Go to Form →</a>
+          </div>
+          <div class="method-card">
+            <div class="method-icon">💬</div>
+            <h4>Send an Email</h4>
+            <p>Prefer email? Get in touch directly for specific enquiries.</p>
+            <a href="mailto:enquiries@example.com">enquiries@example.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-content">
+        <!-- Contact Info -->
+        <div class="contact-info-boxes">
+          <div class="info-box">
+            <h3>📍 Visit Us</h3>
+            <p>
+              <strong>Townfield Allotments</strong><br>
+              Top of Langdale Way<br>
+              Junction with Town-field Lane<br>
+              Frodsham WA6 7LX<br>
+              United Kingdom
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3>⏰ Opening Hours</h3>
+            <p>
+              <strong>Site Access:</strong> 24/7<br>
+              Open year-round for plot access
+            </p>
+            <p>
+              <strong>Best Time to Visit:</strong><br>
+              Weekend mornings & weekday evenings are popular with our community
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3>📧 Get in Touch</h3>
+            <p>
+              <strong>General Enquiries:</strong><br>
+              enquiries@example.com
+            </p>
+            <p>
+              <strong>Plot Applications:</strong><br>
+              plots@example.com
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div id="contact-form" class="contact-form">
+          <h3 style="color: var(--primary); margin-bottom: 1.5rem; margin-top: 0;">Send us a Message</h3>
+          
+          <div id="responseMessage" class="response-message"></div>
+
+          <form id="enquiryForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" />
+              </div>
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <select id="subject" name="subject" required>
+                <option value="">Select a subject</option>
+                <option value="plot-enquiry">Plot Enquiry</option>
+                <option value="plot-application">Plot Application</option>
+                <option value="site-visit">Site Visit Request</option>
+                <option value="general">General Enquiry</option>
+                <option value="membership">Membership Question</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="plotInterest">Interested Plot Size</label>
+              <select id="plotInterest" name="plotInterest">
+                <option value="">Select if applicable</option>
+                <option value="half">Half Plot (57.4 m²)</option>
+                <option value="full">Full Plot (115 m²)</option>
+                <option value="multiple">Multiple Plots</option>
+                <option value="unsure">Not Sure Yet</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="experience">Gardening Experience</label>
+              <select id="experience" name="experience">
+                <option value="">Select your level</option>
+                <option value="beginner">Complete Beginner</option>
+                <option value="some">Some Experience</option>
+                <option value="experienced">Experienced Gardener</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" placeholder="Tell us about yourself and your growing goals..." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <div class="checkbox-group">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="newsletter" name="newsletter" />
+                  <label for="newsletter">Subscribe to our newsletter for updates and growing tips</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="privacy" name="privacy" required />
+                  <label for="privacy">I consent to be contacted about my enquiry *</label>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Enquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="contact-section">
+    <div class="container">
+      <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem;">Common Questions</h3>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">How quickly will I hear back?</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">We aim to respond to all enquiries within 2-3 working days. For plot applications, we'll provide more detailed information at our initial response.</p>
+        </div>
+
+        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Do I need to arrange a visit first?</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">While not required, we recommend visiting the site first to see if it suits you. We're happy to arrange a guided tour or you can visit anytime – it's open 24/7!</p>
+        </div>
+
+        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">What if I have specific access needs?</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">Please mention any accessibility requirements in your message and we'll do our best to assist. Our site is relatively accessible and our community is very supportive.</p>
+        </div>
+
+        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Can I visit outside normal hours?</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">Yes! The site is open 24/7. Many plotholders enjoy early morning or sunset visits. If you'd like a guided tour, we can arrange that separately.</p>
+        </div>
+
+        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Is there a waiting list for plots?</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">Plot availability varies by season. Spring is typically our busiest time for applications. Get in touch to ask about current availability.</p>
+        </div>
+
+        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">How can I learn more about AFTA?</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">Check out our <a href="/about" style="color: var(--accent); text-decoration: none; font-weight: 600;">About page</a> for more information about the Association of Frodsham Townfield Allotments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(document.getElementById('enquiryForm'));
+      const data = Object.fromEntries(formData);
+      
+      // Show success message
+      const messageDiv = document.getElementById('responseMessage');
+      messageDiv.textContent = 'Thank you for your enquiry! We will get back to you soon.';
+      messageDiv.className = 'response-message success';
+      
+      // Reset form
+      setTimeout(() => {
+        document.getElementById('enquiryForm').reset();
+        messageDiv.className = 'response-message';
+      }, 3000);
+      
+      // In a real application, you would send this data to a server
+      console.log('Form submitted:', data);
+    }
+  </script>
+</Layout>

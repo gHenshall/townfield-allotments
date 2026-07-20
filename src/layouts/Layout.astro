@@ -1,0 +1,228 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Townfield Allotments - Grow Your Own" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Townfield Allotments</title>
+    <meta name="description" content={description} />
+    <style is:global>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #2d5016;
+        --primary-light: #3a6b1f;
+        --accent: #e8a84d;
+        --accent-light: #f0b866;
+        --text-dark: #1a1a1a;
+        --text-light: #555;
+        --bg-light: #f8f7f4;
+        --white: #ffffff;
+        --border-radius: 12px;
+        --transition: all 0.3s ease;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-dark);
+        line-height: 1.6;
+        background-color: var(--bg-light);
+      }
+
+      /* Navigation */
+      nav {
+        background-color: var(--primary);
+        padding: 1.2rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      nav .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--accent);
+        text-decoration: none;
+        letter-spacing: 0.5px;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      nav a {
+        color: var(--white);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: var(--transition);
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+      }
+
+      nav a:hover,
+      nav a.active {
+        background-color: var(--primary-light);
+        color: var(--accent);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* Section Styling */
+      section {
+        padding: 4rem 2rem;
+      }
+
+      section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+        position: relative;
+        display: inline-block;
+      }
+
+      section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background-color: var(--accent);
+        border-radius: 2px;
+      }
+
+      .section-subtitle {
+        color: var(--text-light);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-block;
+        padding: 0.9rem 2rem;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--transition);
+        border: 2px solid transparent;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .btn-primary {
+        background-color: var(--accent);
+        color: var(--primary);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--accent-light);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(232, 168, 77, 0.3);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--accent);
+        color: var(--primary);
+      }
+
+      /* Footer */
+      footer {
+        background-color: #1a1a1a;
+        color: var(--white);
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+      }
+
+      footer p {
+        opacity: 0.8;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        nav ul {
+          gap: 1rem;
+        }
+
+        nav a {
+          padding: 0.3rem 0.6rem;
+          font-size: 0.85rem;
+        }
+
+        section h2 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="container">
+        <a href="/" class="logo">🌱 Townfield Allotments</a>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/plots">Plot Info</a></li>
+          <li><a href="/location">Location</a></li>
+          <li><a href="/news">News</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <slot />
+
+    <footer>
+      <p>&copy; 2024 Townfield Allotments. All rights reserved. | Growing community, one plot at a time 🌱</p>
+    </footer>
+
+    <script>
+      // Highlight active navigation link
+      const currentPath = window.location.pathname;
+      document.querySelectorAll('nav a').forEach(link => {
+        const href = link.getAttribute('href');
+        if ((href === '/' && currentPath === '/') || 
+            (href !== '/' && currentPath.includes(href))) {
+          link.classList.add('active');
+        }
+      });
+    </script>
+  </body>
+</html>

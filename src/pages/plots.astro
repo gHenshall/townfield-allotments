@@ -1,0 +1,489 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Plot Information" description="Explore our plot options at Townfield Allotments">
+  <style>
+    .plots-section {
+      background-color: var(--white);
+    }
+
+    .plots-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .plots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .plot-card {
+      background: linear-gradient(135deg, var(--white) 0%, var(--bg-light) 100%);
+      border-radius: var(--border-radius);
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .plot-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      border-color: var(--accent);
+    }
+
+    .plot-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .plot-card h3 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .plot-size {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .plot-dimensions {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .plot-description {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .plot-features {
+      text-align: left;
+      background-color: var(--white);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .plot-features h4 {
+      color: var(--primary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.8rem;
+    }
+
+    .plot-features ul {
+      list-style: none;
+    }
+
+    .plot-features li {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      padding: 0.4rem 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .plot-features li:before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: bold;
+      margin-right: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .guidelines {
+      background-color: var(--bg-light);
+      padding: 3rem 2rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 3rem;
+    }
+
+    .guidelines h3 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .guidelines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .guideline-item {
+      background-color: var(--white);
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .guideline-item h4 {
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .guideline-item p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .comparison-table th {
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    .comparison-table tr:hover {
+      background-color: var(--bg-light);
+    }
+
+    .faq {
+      margin-top: 2rem;
+    }
+
+    .faq-item {
+      background-color: var(--white);
+      margin-bottom: 1rem;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .faq-question {
+      padding: 1.5rem;
+      background-color: var(--bg-light);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .faq-question:hover {
+      background-color: var(--accent-light);
+      color: var(--white);
+    }
+
+    .faq-answer {
+      padding: 1.5rem;
+      color: var(--text-light);
+      line-height: 1.8;
+      display: none;
+    }
+
+    .faq-answer.active {
+      display: block;
+    }
+
+    .faq-icon {
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    @media (max-width: 768px) {
+      .plots-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-table {
+        font-size: 0.85rem;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 0.7rem;
+      }
+    }
+  </style>
+
+  <!-- Page Header -->
+  <section class="plots-section">
+    <div class="container">
+      <h2>Plot Information</h2>
+      <p class="section-subtitle">Find the perfect plot size for your growing ambitions</p>
+    </div>
+  </section>
+
+  <!-- Plot Options -->
+  <section class="plots-section">
+    <div class="container">
+      <div class="plots-grid">
+        <!-- Half Plot -->
+        <div class="plot-card">
+          <div class="plot-icon">📦</div>
+          <h3>Half Plot</h3>
+          <div class="plot-size">57.4 m²</div>
+          <div class="plot-dimensions">14m × 4.1m</div>
+          <p class="plot-description">Perfect for those just starting their growing journey or squeezed for time</p>
+          
+          <div class="plot-features">
+            <h4>Ideal For</h4>
+            <ul>
+              <li>First-time growers</li>
+              <li>Busy professionals</li>
+              <li>Small families</li>
+              <li>Apartment dwellers</li>
+              <li>Limited time commitment</li>
+            </ul>
+          </div>
+
+          <a href="/contact" class="btn btn-primary">Enquire Now</a>
+        </div>
+
+        <!-- Full Plot -->
+        <div class="plot-card">
+          <div class="plot-icon">🌾</div>
+          <h3>Full Plot</h3>
+          <div class="plot-size">115 m²</div>
+          <div class="plot-dimensions">14m × 8.2m</div>
+          <p class="plot-description">A manageable size that still leaves room to expand as your experience grows</p>
+          
+          <div class="plot-features">
+            <h4>Ideal For</h4>
+            <ul>
+              <li>Growing experience</li>
+              <li>Family gardens</li>
+              <li>Serious growers</li>
+              <li>Chickens or livestock</li>
+              <li>Long-term plans</li>
+            </ul>
+          </div>
+
+          <a href="/contact" class="btn btn-primary">Enquire Now</a>
+        </div>
+
+        <!-- Multiple Plots -->
+        <div class="plot-card">
+          <div class="plot-icon">🏆</div>
+          <h3>Multiple Plots</h3>
+          <div class="plot-size">Custom</div>
+          <div class="plot-dimensions">Up to 230m²+</div>
+          <p class="plot-description">Add extra plots as your ambitions grow – many of our plotholders have expanded over time</p>
+          
+          <div class="plot-features">
+            <h4>Ideal For</h4>
+            <ul>
+              <li>Experienced growers</li>
+              <li>Scale operations</li>
+              <li>Mixed growing</li>
+              <li>Community leaders</li>
+              <li>Ambitious projects</li>
+            </ul>
+          </div>
+
+          <a href="/contact" class="btn btn-primary">Enquire Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Comparison -->
+  <section class="plots-section">
+    <div class="container">
+      <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem;">Quick Comparison</h3>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Half Plot</th>
+            <th>Full Plot</th>
+            <th>Multiple Plots</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Size</strong></td>
+            <td>57.4 m²</td>
+            <td>115 m²</td>
+            <td>Custom</td>
+          </tr>
+          <tr>
+            <td><strong>Dimensions</strong></td>
+            <td>14m × 4.1m</td>
+            <td>14m × 8.2m</td>
+            <td>Variable</td>
+          </tr>
+          <tr>
+            <td><strong>Time Commitment</strong></td>
+            <td>5-8 hours/week</td>
+            <td>8-12 hours/week</td>
+            <td>12+ hours/week</td>
+          </tr>
+          <tr>
+            <td><strong>Best For</strong></td>
+            <td>Beginners</td>
+            <td>Intermediate</td>
+            <td>Advanced</td>
+          </tr>
+          <tr>
+            <td><strong>Chickens Possible</strong></td>
+            <td>1-2</td>
+            <td>2-4</td>
+            <td>4+</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Guidelines -->
+  <section class="plots-section">
+    <div class="container">
+      <div class="guidelines">
+        <h3>Plot Guidelines & Rules</h3>
+        <p style="color: var(--text-light); margin-bottom: 1.5rem;">To maintain the high standards of our site and ensure everyone's enjoyment, we ask all plotholders to follow these guidelines:</p>
+        
+        <div class="guidelines-grid">
+          <div class="guideline-item">
+            <h4>✓ Keep It Tidy</h4>
+            <p>Maintain your plot and communal areas to ensure a welcoming environment for all.</p>
+          </div>
+          <div class="guideline-item">
+            <h4>✓ Water Wisely</h4>
+            <p>Use water responsibly and respect shared water resources during dry seasons.</p>
+          </div>
+          <div class="guideline-item">
+            <h4>✓ Respect Neighbors</h4>
+            <p>Keep noise to reasonable levels and be mindful of your neighboring plotholders.</p>
+          </div>
+          <div class="guideline-item">
+            <h4>✓ Organic Methods</h4>
+            <p>We encourage organic growing practices and sustainable methods throughout the site.</p>
+          </div>
+          <div class="guideline-item">
+            <h4>✓ Contribute</h4>
+            <p>Participate in site maintenance and community events when possible.</p>
+          </div>
+          <div class="guideline-item">
+            <h4>✓ Safety First</h4>
+            <p>Keep pathways clear and maintain safe conditions for all site users.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="plots-section">
+    <div class="container">
+      <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem;">Frequently Asked Questions</h3>
+      
+      <div class="faq">
+        <div class="faq-item" onclick="this.classList.toggle('open'); this.querySelector('.faq-answer').classList.toggle('active')">
+          <div class="faq-question">
+            <span>How much does a plot cost?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Plot costs are very reasonable and represent excellent value for money. Contact us directly for current pricing and any special offers for new members.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('open'); this.querySelector('.faq-answer').classList.toggle('active')">
+          <div class="faq-question">
+            <span>Can I expand my plot later?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely! Many of our plotholders start with a half plot and expand to a full plot or even multiple plots as their confidence and ambitions grow. We can arrange this for you as your needs change.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('open'); this.querySelector('.faq-answer').classList.toggle('active')">
+          <div class="faq-question">
+            <span>Are tools and equipment provided?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Tools and equipment are not typically provided, but you'll find our community very supportive. Many plotholders are happy to share advice and sometimes loan tools to beginners.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('open'); this.querySelector('.faq-answer').classList.toggle('active')">
+          <div class="faq-question">
+            <span>What are the access times?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>The site is accessible 24/7, so you can visit your plot whenever it suits you – early mornings, weekends, or whenever you have free time.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('open'); this.querySelector('.faq-answer').classList.toggle('active')">
+          <div class="faq-question">
+            <span>Can I keep chickens?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! Keeping chickens is permitted on our plots. A half plot can typically accommodate 1-2 chickens, while a full plot can support 2-4. You'll need to provide appropriate housing and follow site guidelines.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('open'); this.querySelector('.faq-answer').classList.toggle('active')">
+          <div class="faq-question">
+            <span>What if I've never gardened before?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Perfect! Our community is incredibly supportive of beginners. You'll find experienced growers happy to share tips, advice, and encouragement. Many start with a half plot to build confidence gradually.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="plots-section">
+    <div class="container" style="text-align: center;">
+      <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem;">Ready to Start Growing?</h3>
+      <p style="color: var(--text-light); font-size: 1.05rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Get in touch to enquire about plot availability, arrange a site visit, and start your growing journey with Townfield Allotments.</p>
+      <a href="/contact" class="btn btn-primary">Enquire About a Plot</a>
+    </div>
+  </section>
+
+  <script>
+    // FAQ toggles are handled inline with onclick
+  </script>
+</Layout>
