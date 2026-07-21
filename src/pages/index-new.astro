@@ -1,0 +1,440 @@
+---
+// src/pages/index.astro
+interface Props {
+  title?: string;
+}
+
+const { title = "Welcome to Our Allotment" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Our Allotment Garden</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #2d5016;
+        --secondary-color: #6b9d3a;
+        --accent-color: #f5a623;
+        --light-bg: #f9f7f4;
+        --text-dark: #2c2c2c;
+        --text-light: #666;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background-color: #fff;
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          var(--secondary-color) 100%
+        );
+        color: white;
+        padding: 2rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      header p {
+        font-size: 1.1rem;
+        opacity: 0.95;
+      }
+
+      nav {
+        display: flex;
+        gap: 2rem;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      nav a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      main {
+        padding: 3rem 0;
+      }
+
+      section {
+        margin-bottom: 3rem;
+        scroll-margin-top: 100px;
+      }
+
+      section h2 {
+        color: var(--primary-color);
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 3px solid var(--accent-color);
+        padding-bottom: 0.5rem;
+        display: inline-block;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .card {
+        background: var(--light-bg);
+        padding: 2rem;
+        border-radius: 8px;
+        border-left: 4px solid var(--secondary-color);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      .card h3 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .card p {
+        color: var(--text-light);
+        line-height: 1.8;
+      }
+
+      .highlight {
+        background-color: var(--accent-color);
+        color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+      }
+
+      .highlight h3 {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+        margin-top: 2rem;
+      }
+
+      .about-text p {
+        margin-bottom: 1rem;
+        line-height: 1.8;
+        color: var(--text-light);
+      }
+
+      .about-image {
+        background: linear-gradient(
+          135deg,
+          var(--secondary-color) 0%,
+          var(--primary-color) 100%
+        );
+        height: 300px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+      }
+
+      .seasons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .season {
+        background: white;
+        border: 2px solid var(--secondary-color);
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .season h4 {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+      }
+
+      footer {
+        background: var(--primary-color);
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        margin-top: 3rem;
+      }
+
+      footer p {
+        margin-bottom: 0.5rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+
+      .social-links a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border: 1px solid white;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      .social-links a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 1.8rem;
+        }
+
+        nav {
+          gap: 1rem;
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+        }
+
+        section h2 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <h1>🌱 Our Allotment Garden</h1>
+        <p>Growing together, harvesting happiness</p>
+        <nav>
+          <a href="#about">About</a>
+          <a href="#what-we-grow">What We Grow</a>
+          <a href="#seasons">Seasons</a>
+          <a href="#get-involved">Get Involved</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Hero Section -->
+      <section class="highlight">
+        <h3>Welcome to Our Community Allotment</h3>
+        <p>
+          Join us in celebrating sustainable gardening, fresh produce, and the
+          joy of working the land. Whether you're a seasoned gardener or just
+          starting out, there's a place for you here.
+        </p>
+      </section>
+
+      <!-- About Section -->
+      <section id="about">
+        <h2>About Our Allotment</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              Our allotment has been a beloved community garden for over 15
+              years. We're passionate about organic growing practices,
+              composting, and creating a sustainable food source for our
+              members.
+            </p>
+            <p>
+              We currently have 24 plots ranging from small beginner beds to
+              larger family gardens. Our supportive community shares knowledge,
+              tools, and the occasional cup of tea.
+            </p>
+            <p>
+              We believe in working with nature, protecting local wildlife, and
+              growing food that nourishes both body and soul.
+            </p>
+          </div>
+          <div class="about-image">🌻 🥕 🥬</div>
+        </div>
+      </section>
+
+      <!-- What We Grow Section -->
+      <section id="what-we-grow">
+        <h2>What We Grow</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>🥬 Vegetables</h3>
+            <p>
+              Tomatoes, lettuce, carrots, courgettes, beans, peas, and seasonal
+              greens. We rotate crops to maintain soil health and maximize
+              yield.
+            </p>
+          </div>
+          <div class="card">
+            <h3>🍓 Soft Fruits</h3>
+            <p>
+              Strawberries, raspberries, and blackcurrants provide delicious
+              summer harvests. Our fruit section is thriving and productive.
+            </p>
+          </div>
+          <div class="card">
+            <h3>🌿 Herbs</h3>
+            <p>
+              Fresh herbs including parsley, mint, basil, and thyme are grown by
+              many of our members for cooking and medicinal use.
+            </p>
+          </div>
+          <div class="card">
+            <h3>🐝 Flowers</h3>
+            <p>
+              We cultivate pollinator-friendly flowers that support bees and
+              butterflies while adding colour to our garden.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seasons Section -->
+      <section id="seasons">
+        <h2>Garden Calendar</h2>
+        <div class="seasons">
+          <div class="season">
+            <h4>Spring ❄️➡️☀️</h4>
+            <p>Planting begins. Seeds go in the ground. The garden awakens.</p>
+          </div>
+          <div class="season">
+            <h4>Summer ☀️</h4>
+            <p>
+              Peak growing season. Regular harvests. Community social events.
+            </p>
+          </div>
+          <div class="season">
+            <h4>Autumn 🍂</h4>
+            <p>
+              Final harvests. Preparing beds. Composting season in full swing.
+            </p>
+          </div>
+          <div class="season">
+            <h4>Winter 🥶</h4>
+            <p>
+              Rest and planning. Winter crops. Garden maintenance and repairs.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Get Involved Section -->
+      <section id="get-involved">
+        <h2>Get Involved</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>📋 Rent a Plot</h3>
+            <p>
+              We have plots available throughout the year. Contact us for
+              current availability and pricing. Membership includes access to
+              tools and composting facilities.
+            </p>
+          </div>
+          <div class="card">
+            <h3>🤝 Join Our Team</h3>
+            <p>
+              Volunteer for maintenance days, help with site improvements, or
+              support community events. No experience necessary!
+            </p>
+          </div>
+          <div class="card">
+            <h3>📚 Learn & Share</h3>
+            <p>
+              Attend our monthly workshops on organic gardening, composting, and
+              pest management. Share your expertise with fellow growers.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact">
+        <h2>Contact Us</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>📍 Visit Us</h3>
+            <p>
+              123 Garden Lane<br />
+              Your Town, Your County<br />
+              Opening hours: Weekends 10am-4pm
+            </p>
+          </div>
+          <div class="card">
+            <h3>📧 Get in Touch</h3>
+            <p>
+              Email: <strong>info@ourallotment.com</strong><br />
+              Phone: <strong>01234 567890</strong><br />
+              We'll get back to you within 48 hours
+            </p>
+          </div>
+          <div class="card">
+            <h3>📅 Next Event</h3>
+            <p>
+              Monthly Potluck Lunch<br />
+              Second Sunday of each month<br />
+              12pm at the Tool Shed
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Our Allotment Garden. Growing together.</p>
+      <div class="social-links">
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">Email</a>
+      </div>
+      <p style="margin-top: 1rem; opacity: 0.8; font-size: 0.9rem;">
+        Built with Astro & hosted on Netlify
+      </p>
+    </footer>
+  </body>
+</html>
