@@ -1,12 +1,19 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Home" description="Welcome to Townfield Allotments - Grow Your Own">
+<Layout
+  title="Home"
+  description="Welcome to Townfield Allotments - Grow Your Own"
+>
   <style>
     /* Hero Section */
     .hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      background: linear-gradient(
+        135deg,
+        var(--primary) 0%,
+        var(--primary-light) 100%
+      );
       color: var(--white);
       padding: 5rem 2rem;
       text-align: center;
@@ -15,7 +22,7 @@ import Layout from '../layouts/Layout.astro';
     }
 
     .hero::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
@@ -152,8 +159,8 @@ import Layout from '../layouts/Layout.astro';
       <h1>Welcome to Townfield Allotments</h1>
       <p>Grow Your Own – For Everyone These Days</p>
       <div class="cta-buttons">
-        <a href="/contact" class="btn btn-primary">Enquire About a Plot</a>
-        <a href="/about" class="btn btn-secondary">Learn More</a>
+        <a href="/about" class="btn btn-primary">Learn More</a>
+        <a href="/plots" class="btn btn-secondary">View Our Plots</a>
       </div>
     </div>
   </section>
@@ -162,7 +169,9 @@ import Layout from '../layouts/Layout.astro';
   <section class="about-preview">
     <div class="container">
       <h2>Why Join Us?</h2>
-      <p class="section-subtitle">Discover the benefits of Townfield Allotments</p>
+      <p class="section-subtitle">
+        Discover the benefits of Townfield Allotments
+      </p>
 
       <div class="features-grid">
         <div class="feature-item">
@@ -207,13 +216,20 @@ import Layout from '../layouts/Layout.astro';
 
       <div class="about-content">
         <div>
-          <p>We offer plots to rent for vegetable growing and keeping chickens – along the same lines as a traditional allotment. Whether you're a seasoned gardener or just starting out, we have the perfect plot size for you.</p>
-          <p>Forget the old image of allotments! These days it's often a family event. Grow Your Own is for everyone – from young families to pensioners, all working together in our vibrant community.</p>
+          <p>
+            We offer plots to rent for vegetable growing and keeping chickens –
+            along the same lines as a traditional allotment. Whether you're a
+            seasoned gardener or just starting out, we have the perfect plot
+            size for you.
+          </p>
+          <p>
+            Forget the old image of allotments! These days it's often a family
+            event. Grow Your Own is for everyone – from young families to
+            pensioners, all working together in our vibrant community.
+          </p>
           <a href="/about" class="btn btn-primary">Learn More About Us</a>
         </div>
-        <div class="about-image">
-          🌿
-        </div>
+        <div class="about-image">🌿</div>
       </div>
     </div>
   </section>

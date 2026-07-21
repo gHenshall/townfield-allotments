@@ -4,10 +4,11 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Townfield Allotments - Grow Your Own" } = Astro.props;
+const { title, description = "Townfield Allotments - Grow Your Own" } =
+  Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -35,7 +36,7 @@ const { title, description = "Townfield Allotments - Grow Your Own" } = Astro.pr
       }
 
       body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         color: var(--text-dark);
         line-height: 1.6;
         background-color: var(--bg-light);
@@ -110,7 +111,7 @@ const { title, description = "Townfield Allotments - Grow Your Own" } = Astro.pr
       }
 
       section h2::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -0.5rem;
         left: 0;
@@ -202,7 +203,6 @@ const { title, description = "Townfield Allotments - Grow Your Own" } = Astro.pr
           <li><a href="/plots">Plot Info</a></li>
           <li><a href="/location">Location</a></li>
           <li><a href="/news">News</a></li>
-          <li><a href="/contact">Contact</a></li>
         </ul>
       </div>
     </nav>
@@ -210,17 +210,22 @@ const { title, description = "Townfield Allotments - Grow Your Own" } = Astro.pr
     <slot />
 
     <footer>
-      <p>&copy; 2024 Townfield Allotments. All rights reserved. | Growing community, one plot at a time 🌱</p>
+      <p>
+        &copy; 2024 Townfield Allotments. All rights reserved. | Growing
+        community, one plot at a time 🌱
+      </p>
     </footer>
 
     <script>
       // Highlight active navigation link
       const currentPath = window.location.pathname;
-      document.querySelectorAll('nav a').forEach(link => {
-        const href = link.getAttribute('href');
-        if ((href === '/' && currentPath === '/') || 
-            (href !== '/' && currentPath.includes(href))) {
-          link.classList.add('active');
+      document.querySelectorAll("nav a").forEach((link) => {
+        const href = link.getAttribute("href");
+        if (
+          (href === "/" && currentPath === "/") ||
+          (href !== "/" && currentPath.includes(href))
+        ) {
+          link.classList.add("active");
         }
       });
     </script>

@@ -1,59 +1,74 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
 const newsItems = [
   {
     id: 1,
     date: "July 2024",
     title: "Summer Growing Season in Full Swing",
-    excerpt: "Our plotholders are making the most of the summer months with vibrant growth across the site. Tomatoes, courgettes, and beans are thriving!",
-    content: "The summer months have been exceptionally productive at Townfield Allotments. Despite the usual challenges of managing watering during dry spells, our community has pulled together to ensure all plots are flourishing. Many plotholders are already planning their autumn crops and sharing seeds with the community.",
-    author: "AFTA Team"
+    excerpt:
+      "Our plotholders are making the most of the summer months with vibrant growth across the site. Tomatoes, courgettes, and beans are thriving!",
+    content:
+      "The summer months have been exceptionally productive at Townfield Allotments. Despite the usual challenges of managing watering during dry spells, our community has pulled together to ensure all plots are flourishing. Many plotholders are already planning their autumn crops and sharing seeds with the community.",
+    author: "AFTA Team",
   },
   {
     id: 2,
     date: "June 2024",
     title: "Community Workday - Site Improvements",
-    excerpt: "Huge thanks to all volunteers who helped with path maintenance and fence repairs. The site looks fantastic!",
-    content: "Last month's community workday was a great success! Over 30 plotholders turned out to help with various site improvements. We completed path repairs, fence maintenance, and cleared communal areas. It's these efforts that make Townfield such a special place.",
-    author: "AFTA Committee"
+    excerpt:
+      "Huge thanks to all volunteers who helped with path maintenance and fence repairs. The site looks fantastic!",
+    content:
+      "Last month's community workday was a great success! Over 30 plotholders turned out to help with various site improvements. We completed path repairs, fence maintenance, and cleared communal areas. It's these efforts that make Townfield such a special place.",
+    author: "AFTA Committee",
   },
   {
     id: 3,
     date: "May 2024",
     title: "Welcome to Our New Plotholders",
-    excerpt: "This spring we're delighted to welcome 8 new families to the Townfield community. Get to know them at our upcoming social event!",
-    content: "We're thrilled to welcome a diverse group of new plotholders to our community this spring. From first-time gardeners to experienced growers looking for a new space, they bring fresh energy and ideas to the site. Join us at our next social event to welcome them properly!",
-    author: "AFTA Team"
+    excerpt:
+      "This spring we're delighted to welcome 8 new families to the Townfield community. Get to know them at our upcoming social event!",
+    content:
+      "We're thrilled to welcome a diverse group of new plotholders to our community this spring. From first-time gardeners to experienced growers looking for a new space, they bring fresh energy and ideas to the site. Join us at our next social event to welcome them properly!",
+    author: "AFTA Team",
   },
   {
     id: 4,
     date: "April 2024",
     title: "Spring Planting Guide - Expert Tips",
-    excerpt: "Thinking about what to plant this spring? Our expert plotholders share their top recommendations for April and May planting.",
-    content: "Spring is the perfect time to plant outdoors! Beans, peas, lettuce, and courgettes are ideal for planting now. Several of our experienced plotholders have shared their top tips for getting the best results. Check our resources page for their detailed guides.",
-    author: "Sarah, Senior Plotholder"
+    excerpt:
+      "Thinking about what to plant this spring? Our expert plotholders share their top recommendations for April and May planting.",
+    content:
+      "Spring is the perfect time to plant outdoors! Beans, peas, lettuce, and courgettes are ideal for planting now. Several of our experienced plotholders have shared their top tips for getting the best results. Check our resources page for their detailed guides.",
+    author: "Sarah, Senior Plotholder",
   },
   {
     id: 5,
     date: "March 2024",
     title: "New Water System Installation Complete",
-    excerpt: "Exciting news! We've completed the installation of an improved water system with new access points across the site.",
-    content: "AFTA has successfully completed the installation of an improved water distribution system. This project brings multiple new water points closer to the plots, making it easier for plotholders to water their vegetables and keep their chickens hydrated during warm months.",
-    author: "AFTA Committee"
+    excerpt:
+      "Exciting news! We've completed the installation of an improved water system with new access points across the site.",
+    content:
+      "AFTA has successfully completed the installation of an improved water distribution system. This project brings multiple new water points closer to the plots, making it easier for plotholders to water their vegetables and keep their chickens hydrated during warm months.",
+    author: "AFTA Committee",
   },
   {
     id: 6,
     date: "February 2024",
     title: "Plot Availability - Spring Lettings Open",
-    excerpt: "Spring lettings are now open! We have availability for both half and full plots. Apply now for the growing season.",
-    content: "We're pleased to announce that spring lettings are now open at Townfield Allotments. We currently have several plots available for the upcoming growing season. Whether you're a first-time gardener or an experienced grower, now is a great time to join our community. Get in touch to arrange a site visit!",
-    author: "AFTA Lettings Team"
-  }
+    excerpt:
+      "Spring lettings are now open! We have availability for both half and full plots. Apply now for the growing season.",
+    content:
+      "We're pleased to announce that spring lettings are now open at Townfield Allotments. We currently have several plots available for the upcoming growing season. Whether you're a first-time gardener or an experienced grower, now is a great time to join our community. Get in touch to arrange a site visit!",
+    author: "AFTA Lettings Team",
+  },
 ];
 ---
 
-<Layout title="News" description="Latest news and updates from Townfield Allotments">
+<Layout
+  title="News"
+  description="Latest news and updates from Townfield Allotments"
+>
   <style>
     .news-section {
       background-color: var(--white);
@@ -295,7 +310,9 @@ const newsItems = [
   <section class="news-section">
     <div class="container">
       <h2>News & Updates</h2>
-      <p class="section-subtitle">Stay informed about what's happening at Townfield Allotments</p>
+      <p class="section-subtitle">
+        Stay informed about what's happening at Townfield Allotments
+      </p>
     </div>
   </section>
 
@@ -304,8 +321,14 @@ const newsItems = [
     <div class="container">
       <div class="newsletter-section">
         <h3>📧 Stay Updated</h3>
-        <p>Subscribe to our newsletter for the latest news, growing tips, and community events</p>
-        <form class="newsletter-form" onsubmit="alert('Thank you for subscribing!'); event.preventDefault();">
+        <p>
+          Subscribe to our newsletter for the latest news, growing tips, and
+          community events
+        </p>
+        <form
+          class="newsletter-form"
+          onsubmit="alert('Thank you for subscribing!'); event.preventDefault();"
+        >
           <input type="email" placeholder="Enter your email" required />
           <button type="submit">Subscribe</button>
         </form>
@@ -316,61 +339,64 @@ const newsItems = [
   <!-- Featured News -->
   <section class="news-section">
     <div class="container">
-      {newsItems[0] && (
-        <div class="featured-news">
-          <div>
-            <div class="featured-date">{newsItems[0].date}</div>
-            <h2>{newsItems[0].title}</h2>
-            <p>{newsItems[0].content}</p>
-            <p style="font-size: 0.9rem; opacity: 0.8;">By {newsItems[0].author}</p>
+      {
+        newsItems[0] && (
+          <div class="featured-news">
+            <div>
+              <div class="featured-date">{newsItems[0].date}</div>
+              <h2>{newsItems[0].title}</h2>
+              <p>{newsItems[0].content}</p>
+              <p style="font-size: 0.9rem; opacity: 0.8;">
+                By {newsItems[0].author}
+              </p>
+            </div>
+            <div class="featured-icon">📰</div>
           </div>
-          <div class="featured-icon">📰</div>
-        </div>
-      )}
+        )
+      }
     </div>
   </section>
 
   <!-- All News -->
   <section class="news-section">
     <div class="container">
-      <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem;">Recent News</h3>
-      
-      <div class="news-grid">
-        {newsItems.map((item) => (
-          <div class="news-card">
-            <div class="news-card-header">
-              <div class="news-date">{item.date}</div>
-              <h3>{item.title}</h3>
-              <p>{item.excerpt}</p>
-            </div>
-            <div class="news-card-footer">
-              <span class="news-author">By {item.author}</span>
-              <a href={`#news-${item.id}`} class="news-link">
-                Read More
-                <span>→</span>
-              </a>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+      <h3
+        style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem;"
+      >
+        Recent News
+      </h3>
 
-  <!-- Call to Action -->
-  <section class="news-section">
-    <div class="container" style="text-align: center;">
-      <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem;">Have News to Share?</h3>
-      <p style="color: var(--text-light); font-size: 1.05rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">We love celebrating the achievements and stories of our community. Have a growing success to share or an event to promote? Get in touch with us!</p>
-      <a href="/contact" class="btn btn-primary">Contact Us</a>
+      <div class="news-grid">
+        {
+          newsItems.map((item) => (
+            <div class="news-card">
+              <div class="news-card-header">
+                <div class="news-date">{item.date}</div>
+                <h3>{item.title}</h3>
+                <p>{item.excerpt}</p>
+              </div>
+              <div class="news-card-footer">
+                <span class="news-author">By {item.author}</span>
+                <a href={`#news-${item.id}`} class="news-link">
+                  Read More
+                  <span>→</span>
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </section>
 
   <script>
     // Newsletter form handling
-    document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Thank you for subscribing to our newsletter!');
-      this.reset();
-    });
+    document
+      .querySelector(".newsletter-form")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert("Thank you for subscribing to our newsletter!");
+        this.reset();
+      });
   </script>
 </Layout>

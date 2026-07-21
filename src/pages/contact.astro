@@ -1,468 +1,327 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Contact" description="Get in touch with Townfield Allotments - plot enquiries and more">
+<Layout
+  title="Information"
+  description="Contact information for Townfield Allotments"
+>
   <style>
-    .contact-section {
+    .info-section {
       background-color: var(--white);
     }
 
-    .contact-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .contact-content {
+    .info-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
       margin-top: 2rem;
       margin-bottom: 3rem;
-    }
-
-    .contact-info-boxes {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
     }
 
     .info-box {
       background: linear-gradient(135deg, var(--primary-light), var(--primary));
       color: var(--white);
-      padding: 2rem;
+      padding: 2.5rem;
       border-radius: var(--border-radius);
+      text-align: center;
     }
 
     .info-box h3 {
       color: var(--accent);
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-
-    .info-box p {
-      color: rgba(255, 255, 255, 0.95);
-      line-height: 1.8;
-      margin-bottom: 0.5rem;
-    }
-
-    .info-box strong {
-      color: var(--accent);
-    }
-
-    .contact-form {
-      background-color: var(--bg-light);
-      padding: 2rem;
-      border-radius: var(--border-radius);
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 0.8rem;
-      border: 2px solid var(--white);
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 1rem;
-      transition: var(--transition);
-      background-color: var(--white);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(232, 168, 77, 0.1);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .form-row .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .checkbox-group {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.8rem;
-    }
-
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-    }
-
-    .checkbox-item input[type="checkbox"] {
-      width: auto;
-      margin-right: 0.8rem;
-      cursor: pointer;
-    }
-
-    .checkbox-item label {
-      margin-bottom: 0;
-      font-weight: normal;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 1rem;
-      background-color: var(--accent);
-      color: var(--primary);
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .submit-btn:hover {
-      background-color: var(--accent-light);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(232, 168, 77, 0.3);
-    }
-
-    .quick-contact {
-      background-color: var(--bg-light);
-      padding: 2rem;
-      border-radius: var(--border-radius);
-      margin-bottom: 3rem;
-    }
-
-    .quick-contact h3 {
-      color: var(--primary);
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
       margin-top: 0;
     }
 
-    .quick-methods {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
+    .info-box p {
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
     }
 
-    .method-card {
-      background-color: var(--white);
-      padding: 1.5rem;
+    .info-box strong {
+      color: var(--accent);
+      display: block;
+      font-size: 1.1rem;
+    }
+
+    .info-detail {
+      background-color: var(--bg-light);
+      padding: 2rem;
       border-radius: var(--border-radius);
-      text-align: center;
+      margin-bottom: 2rem;
       border-left: 4px solid var(--accent);
     }
 
-    .method-icon {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+    .info-detail h3 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
     }
 
-    .method-card h4 {
-      color: var(--primary);
+    .info-detail p {
+      color: var(--text-light);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .location-highlight {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      color: var(--white);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .location-highlight h2 {
+      color: var(--white);
+      margin-bottom: 1rem;
+      margin-top: 0;
+    }
+
+    .location-highlight h2::after {
+      background-color: var(--accent);
+    }
+
+    .location-highlight p {
+      color: rgba(255, 255, 255, 0.95);
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
     }
 
-    .method-card p {
-      color: var(--text-light);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-    }
-
-    .method-card a {
+    .location-highlight strong {
       color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      transition: var(--transition);
-    }
-
-    .method-card a:hover {
-      color: var(--accent-light);
-    }
-
-    .response-message {
-      padding: 1rem;
-      border-radius: 6px;
-      margin-bottom: 1.5rem;
-      display: none;
-    }
-
-    .response-message.success {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
+      font-size: 1.2rem;
       display: block;
-    }
-
-    .response-message.error {
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-      display: block;
+      margin-top: 1rem;
     }
 
     @media (max-width: 768px) {
-      .contact-content {
-        grid-template-columns: 1fr;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-
-      .quick-methods {
+      .info-grid {
         grid-template-columns: 1fr;
       }
     }
   </style>
 
   <!-- Page Header -->
-  <section class="contact-section">
+  <section class="info-section">
     <div class="container">
-      <h2>Get in Touch</h2>
-      <p class="section-subtitle">Have questions? Ready to enquire about a plot? We'd love to hear from you</p>
+      <h2>Information</h2>
+      <p class="section-subtitle">
+        Find out all you need to know about Townfield Allotments
+      </p>
     </div>
   </section>
 
-  <!-- Quick Contact Methods -->
-  <section class="contact-section">
+  <!-- Location Highlight -->
+  <section class="info-section">
     <div class="container">
-      <div class="quick-contact">
-        <h3>Quick Contact Methods</h3>
-        <div class="quick-methods">
-          <div class="method-card">
-            <div class="method-icon">📍</div>
-            <h4>Visit Us</h4>
-            <p>The site is open 24/7. Stop by anytime to see the allotments for yourself.</p>
-            <a href="/location">Get Directions →</a>
-          </div>
-          <div class="method-card">
-            <div class="method-icon">📋</div>
-            <h4>Use the Form</h4>
-            <p>Fill out the enquiry form below and we'll get back to you soon.</p>
-            <a href="#contact-form">Go to Form →</a>
-          </div>
-          <div class="method-card">
-            <div class="method-icon">💬</div>
-            <h4>Send an Email</h4>
-            <p>Prefer email? Get in touch directly for specific enquiries.</p>
-            <a href="mailto:enquiries@example.com">enquiries@example.com</a>
-          </div>
+      <div class="location-highlight">
+        <h2>Visit Townfield Allotments</h2>
+        <p>Top of Langdale Way, Junction with Town-field Lane</p>
+        <strong>Frodsham WA6 7LX, United Kingdom</strong>
+        <p style="margin-top: 1.5rem; font-size: 1rem; opacity: 0.95;">
+          Open 24/7 • No appointment needed
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Information Boxes -->
+  <section class="info-section">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-box">
+          <h3>📍 Location</h3>
+          <p>
+            Find us at the junction of Langdale Way and Town-field Lane in
+            Frodsham. The site is easily accessible and open around the clock.
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>🕐 Hours</h3>
+          <p>
+            <strong>Open 24/7</strong>
+            Year-round access to the site. Visit whenever it suits you.
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>🌿 About Us</h3>
+          <p>
+            Townfield Allotments is managed by AFTA (Association of Frodsham
+            Townfield Allotments) on behalf of the landowner, Atlantic Hardware.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Main Contact Section -->
-  <section class="contact-section">
+  <!-- Detailed Information -->
+  <section class="info-section">
     <div class="container">
-      <div class="contact-content">
-        <!-- Contact Info -->
-        <div class="contact-info-boxes">
-          <div class="info-box">
-            <h3>📍 Visit Us</h3>
-            <p>
-              <strong>Townfield Allotments</strong><br>
-              Top of Langdale Way<br>
-              Junction with Town-field Lane<br>
-              Frodsham WA6 7LX<br>
-              United Kingdom
-            </p>
-          </div>
+      <div class="info-detail">
+        <h3>Getting Here</h3>
+        <p>
+          <strong>By Car:</strong> Use postcode WA6 7LX in your satnav. Head to the
+          junction of Langdale Way and Town-field Lane – the allotments are in the
+          field at the top of Langdale Way.
+        </p>
+        <p>
+          <strong>By Public Transport:</strong> Local bus services run through Frodsham
+          to the Langdale Way area. It's a short walk from the nearest bus stop.
+        </p>
+        <p>
+          <strong>By Bike:</strong> Cycling is a great way to visit. Bike parking
+          is available at the site.
+        </p>
+        <p>
+          <strong>On Foot:</strong> The site is walkable from various parts of Frodsham.
+          Just head to the address above.
+        </p>
+      </div>
 
-          <div class="info-box">
-            <h3>⏰ Opening Hours</h3>
-            <p>
-              <strong>Site Access:</strong> 24/7<br>
-              Open year-round for plot access
-            </p>
-            <p>
-              <strong>Best Time to Visit:</strong><br>
-              Weekend mornings & weekday evenings are popular with our community
-            </p>
-          </div>
+      <div class="info-detail">
+        <h3>Parking</h3>
+        <p>
+          Car parking is available near the site entrance. Please park
+          considerately to ensure access for emergency vehicles and maintain
+          good relationships with neighboring properties.
+        </p>
+        <p>
+          Bike parking is also available on site for those cycling to visit.
+        </p>
+      </div>
 
-          <div class="info-box">
-            <h3>📧 Get in Touch</h3>
-            <p>
-              <strong>General Enquiries:</strong><br>
-              enquiries@example.com
-            </p>
-            <p>
-              <strong>Plot Applications:</strong><br>
-              plots@example.com
-            </p>
-          </div>
-        </div>
+      <div class="info-detail">
+        <h3>Site Access</h3>
+        <p>
+          The allotments are open 24/7, giving you complete flexibility to visit
+          whenever works best for your schedule. Whether you're an early riser
+          or prefer evening visits, the site is always accessible.
+        </p>
+        <p>
+          The site is relatively flat and easy to navigate, with well-maintained
+          pathways throughout.
+        </p>
+      </div>
 
-        <!-- Contact Form -->
-        <div id="contact-form" class="contact-form">
-          <h3 style="color: var(--primary); margin-bottom: 1.5rem; margin-top: 0;">Send us a Message</h3>
-          
-          <div id="responseMessage" class="response-message"></div>
+      <div class="info-detail">
+        <h3>About AFTA</h3>
+        <p>
+          The Association of Frodsham Townfield Allotments (AFTA) manages the
+          day-to-day operations of the allotments. AFTA handles plot management,
+          site maintenance, and works to ensure high standards across the site
+          while fostering a strong community atmosphere.
+        </p>
+      </div>
 
-          <form id="enquiryForm" onsubmit="handleFormSubmit(event)">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" required />
-              </div>
-              <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" />
-              </div>
-              <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" id="address" name="address" />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="subject">Subject *</label>
-              <select id="subject" name="subject" required>
-                <option value="">Select a subject</option>
-                <option value="plot-enquiry">Plot Enquiry</option>
-                <option value="plot-application">Plot Application</option>
-                <option value="site-visit">Site Visit Request</option>
-                <option value="general">General Enquiry</option>
-                <option value="membership">Membership Question</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="plotInterest">Interested Plot Size</label>
-              <select id="plotInterest" name="plotInterest">
-                <option value="">Select if applicable</option>
-                <option value="half">Half Plot (57.4 m²)</option>
-                <option value="full">Full Plot (115 m²)</option>
-                <option value="multiple">Multiple Plots</option>
-                <option value="unsure">Not Sure Yet</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="experience">Gardening Experience</label>
-              <select id="experience" name="experience">
-                <option value="">Select your level</option>
-                <option value="beginner">Complete Beginner</option>
-                <option value="some">Some Experience</option>
-                <option value="experienced">Experienced Gardener</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Message *</label>
-              <textarea id="message" name="message" placeholder="Tell us about yourself and your growing goals..." required></textarea>
-            </div>
-
-            <div class="form-group">
-              <div class="checkbox-group">
-                <div class="checkbox-item">
-                  <input type="checkbox" id="newsletter" name="newsletter" />
-                  <label for="newsletter">Subscribe to our newsletter for updates and growing tips</label>
-                </div>
-                <div class="checkbox-item">
-                  <input type="checkbox" id="privacy" name="privacy" required />
-                  <label for="privacy">I consent to be contacted about my enquiry *</label>
-                </div>
-              </div>
-            </div>
-
-            <button type="submit" class="submit-btn">Send Enquiry</button>
-          </form>
-        </div>
+      <div class="info-detail">
+        <h3>Our Community</h3>
+        <p>
+          Townfield Allotments is home to nearly 50 plotholders of all ages,
+          from young families to pensioners. We're a diverse and supportive
+          community dedicated to growing food, keeping animals, and building
+          connections.
+        </p>
+        <p>
+          Whether you're interested in vegetables, keeping chickens, or simply
+          enjoying nature and meeting neighbors, there's always something
+          happening at Townfield.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- FAQ Section -->
-  <section class="contact-section">
+  <!-- What's Nearby -->
+  <section class="info-section">
     <div class="container">
-      <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem;">Common Questions</h3>
+      <h3
+        style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem;"
+      >
+        What's Nearby
+      </h3>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
-          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">How quickly will I hear back?</h4>
-          <p style="color: var(--text-light); font-size: 0.95rem;">We aim to respond to all enquiries within 2-3 working days. For plot applications, we'll provide more detailed information at our initial response.</p>
+      <div class="info-grid">
+        <div
+          style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;"
+        >
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛒</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">
+            Local Shops
+          </h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">
+            Frodsham town center offers a range of shops and services within
+            easy reach
+          </p>
         </div>
 
-        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
-          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Do I need to arrange a visit first?</h4>
-          <p style="color: var(--text-light); font-size: 0.95rem;">While not required, we recommend visiting the site first to see if it suits you. We're happy to arrange a guided tour or you can visit anytime – it's open 24/7!</p>
+        <div
+          style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;"
+        >
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">☕</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">
+            Cafes & Restaurants
+          </h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">
+            Enjoy refreshments before or after visiting the allotments
+          </p>
         </div>
 
-        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
-          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">What if I have specific access needs?</h4>
-          <p style="color: var(--text-light); font-size: 0.95rem;">Please mention any accessibility requirements in your message and we'll do our best to assist. Our site is relatively accessible and our community is very supportive.</p>
+        <div
+          style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;"
+        >
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌳</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">
+            Green Spaces
+          </h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">
+            Beautiful countryside and parks are within easy reach
+          </p>
         </div>
 
-        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
-          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Can I visit outside normal hours?</h4>
-          <p style="color: var(--text-light); font-size: 0.95rem;">Yes! The site is open 24/7. Many plotholders enjoy early morning or sunset visits. If you'd like a guided tour, we can arrange that separately.</p>
+        <div
+          style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;"
+        >
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🚂</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">
+            Transport Links
+          </h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">
+            Frodsham railway station and road connections are convenient
+          </p>
         </div>
 
-        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
-          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Is there a waiting list for plots?</h4>
-          <p style="color: var(--text-light); font-size: 0.95rem;">Plot availability varies by season. Spring is typically our busiest time for applications. Get in touch to ask about current availability.</p>
+        <div
+          style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;"
+        >
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏥</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">
+            Medical Services
+          </h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">
+            Local health facilities and emergency services are nearby
+          </p>
         </div>
 
-        <div style="background-color: var(--bg-light); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent);">
-          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">How can I learn more about AFTA?</h4>
-          <p style="color: var(--text-light); font-size: 0.95rem;">Check out our <a href="/about" style="color: var(--accent); text-decoration: none; font-weight: 600;">About page</a> for more information about the Association of Frodsham Townfield Allotments.</p>
+        <div
+          style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;"
+        >
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">📚</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">
+            Community Facilities
+          </h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">
+            Library, schools, and other community resources are close by
+          </p>
         </div>
       </div>
     </div>
   </section>
-
-  <script>
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      
-      // Get form data
-      const formData = new FormData(document.getElementById('enquiryForm'));
-      const data = Object.fromEntries(formData);
-      
-      // Show success message
-      const messageDiv = document.getElementById('responseMessage');
-      messageDiv.textContent = 'Thank you for your enquiry! We will get back to you soon.';
-      messageDiv.className = 'response-message success';
-      
-      // Reset form
-      setTimeout(() => {
-        document.getElementById('enquiryForm').reset();
-        messageDiv.className = 'response-message';
-      }, 3000);
-      
-      // In a real application, you would send this data to a server
-      console.log('Form submitted:', data);
-    }
-  </script>
 </Layout>

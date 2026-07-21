@@ -1,6 +1,6 @@
 # Townfield Allotments Website
 
-A modern, responsive multi-page website for Townfield Allotments built with Astro. This website features a beautiful design with consistent styling across all pages and includes everything needed to showcase your allotments and manage enquiries.
+A modern, responsive multi-page website for Townfield Allotments built with Astro. This is a pure informational website that showcases the allotments with beautiful design and consistent styling across all pages.
 
 ## 📁 Project Structure
 
@@ -65,13 +65,14 @@ src/
 - Featured news section
 - Sample news articles (easily editable)
 
-### 6. **Contact** (`contact.astro`)
+### 6. **Information** (`contact.astro`)
 
-- Comprehensive contact form
-- Multiple contact methods
-- Quick reference contact info
-- Common questions FAQ
-- Form validation and feedback
+- Location and access details
+- Hours of operation
+- How to get there
+- Parking information
+- Community information
+- What's nearby
 
 ## 🚀 Getting Started
 
@@ -138,30 +139,6 @@ Each page is straightforward to edit:
 - **News**: Edit the `newsItems` array at the top of the file
 - **Contact**: Update contact methods and add real email addresses
 
-### Forms Integration
-
-The contact form currently shows a success message. To actually receive enquiries:
-
-#### Option 1: Netlify Forms (Recommended for Netlify hosting)
-
-1. In `contact.astro`, add `netlify` attribute to the form:
-
-```astro
-<form netlify>
-  <!-- form fields -->
-</form>
-```
-
-2. Deploy to Netlify and enable form submissions in your Netlify dashboard
-
-#### Option 2: External Service
-
-Integrate with services like:
-
-- Formspree (formspree.io)
-- EmailJS (emailjs.com)
-- Basin (usebasin.com)
-
 ### News Management
 
 Edit the `newsItems` array in `news.astro` to add/update news:
@@ -203,15 +180,6 @@ const newsItems = [
 - Mobile-friendly design
 - Fast loading times
 
-## 📧 Newsletter
-
-The newsletter signup form is ready to integrate with services like:
-
-- Mailchimp
-- ConvertKit
-- Substack
-- EmailJS
-
 ## 🚀 Deployment
 
 ### Deploy to Netlify
@@ -235,13 +203,12 @@ The `npm run build` command creates a static site that can be deployed anywhere.
 
 ## 🎯 Next Steps
 
-1. **Update Contact Information**: Add real email addresses and phone numbers
-2. **Add Images**: Replace emoji placeholders with real photos of the allotments
-3. **Integrate Forms**: Connect the contact form to your preferred email service
-4. **Add Google Maps**: Embed an actual map on the location page
-5. **Newsletter Setup**: Connect to your email marketing platform
-6. **Analytics**: Add Google Analytics or similar
-7. **Custom Domain**: Add your domain (e.g., townfield-allotments.co.uk)
+1. **Add Images**: Replace emoji placeholders with real photos of the allotments
+2. **Add Google Maps**: Embed an actual map on the location page
+3. **Analytics**: Add Google Analytics or similar
+4. **Custom Domain**: Add your domain (e.g., townfield-allotments.co.uk)
+5. **Update Content**: Keep the news section updated with latest information
+6. **Expand Resources**: Add growing guides, photo galleries, or additional pages as needed
 
 ## 📝 Content Tips
 
@@ -276,14 +243,15 @@ The `npm run build` command creates a static site that can be deployed anywhere.
 
 ## 💡 Features Ready to Add
 
-- [ ] Photo gallery section
+- [ ] Photo gallery section with site images
 - [ ] Community member testimonials
 - [ ] Event calendar
-- [ ] Growing guides/resources
-- [ ] Plotholders directory
-- [ ] Blog system
+- [ ] Growing guides and resources
+- [ ] Embedded Google Map
+- [ ] Blog system for tips and updates
 - [ ] Dark mode toggle
 - [ ] Multi-language support
+- [ ] PDF resources/guides for download
 
 ---
 
