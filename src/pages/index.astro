@@ -1,236 +1,224 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+// Get all news posts from markdown files
+const allPosts = await getCollection("news");
+
+// Sort by date (newest first)
+const news = allPosts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+);
 ---
 
-<Layout
-  title="Home"
-  description="Welcome to Townfield Allotments - Grow Your Own"
->
-  <style>
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(
-        135deg,
-        var(--primary) 0%,
-        var(--primary-light) 100%
-      );
-      color: var(--white);
-      padding: 5rem 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      opacity: 0.1;
-    }
-
-    .hero .container {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      letter-spacing: -1px;
-    }
-
-    .hero p {
-      font-size: 1.4rem;
-      margin-bottom: 2rem;
-      opacity: 0.95;
-      font-weight: 300;
-    }
-
-    .hero .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .feature-item {
-      background-color: var(--white);
-      padding: 2rem;
-      border-radius: var(--border-radius);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      transition: var(--transition);
-    }
-
-    .feature-item:hover {
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-      transform: translateY(-5px);
-    }
-
-    .feature-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .feature-item h3 {
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .feature-item p {
-      color: var(--text-light);
-      font-size: 0.95rem;
-    }
-
-    .about-preview {
-      background-color: var(--white);
-    }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-      margin-top: 2rem;
-    }
-
-    .about-content p {
-      color: var(--text-light);
-      margin-bottom: 1.5rem;
-      font-size: 1.05rem;
-      line-height: 1.8;
-    }
-
-    .about-image {
-      background: linear-gradient(135deg, var(--primary-light), var(--primary));
-      border-radius: var(--border-radius);
-      padding: 3rem;
-      text-align: center;
-      color: var(--white);
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-    }
-
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-
-      .hero p {
-        font-size: 1.1rem;
-      }
-
-      .hero .cta-buttons {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .about-content {
-        grid-template-columns: 1fr;
-      }
-
-      .about-image {
-        height: 200px;
-        font-size: 3rem;
-      }
-    }
-  </style>
-
+<Layout title="Community Allotment - Growing Together">
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
-      <h1>Welcome to Townfield Allotments</h1>
-      <p>Grow Your Own – For Everyone These Days</p>
-      <div class="cta-buttons">
-        <a href="/about" class="btn btn-primary">Learn More</a>
-        <a href="/plots" class="btn btn-secondary">View Our Plots</a>
+      <div class="hero-content">
+        <h1>Where Seeds Become Stories</h1>
+        <p class="hero-subtitle">
+          A thriving community garden. Grow your own vegetables, learn from
+          neighbors, and watch things flourish.
+        </p>
+      </div>
+      <div class="hero-visual">
+        <div class="growing-chart">
+          <div class="bar" style="height: 30%;"></div>
+          <div class="bar" style="height: 45%;"></div>
+          <div class="bar" style="height: 60%;"></div>
+          <div class="bar" style="height: 75%;"></div>
+          <div class="bar" style="height: 90%;"></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Quick Features -->
-  <section class="about-preview">
+  <!-- About Section -->
+  <section class="about" id="about">
     <div class="container">
-      <h2>Why Join Us?</h2>
-      <p class="section-subtitle">
-        Discover the benefits of Townfield Allotments
+      <h2>What We're Growing</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="icon">🥕</div>
+          <h3>Fresh Produce</h3>
+          <p>
+            From carrots to courgettes. Grow what you love to eat, harvest it at
+            peak ripeness, and enjoy the difference real food makes.
+          </p>
+        </div>
+        <div class="about-card">
+          <div class="icon">🤝</div>
+          <h3>Community</h3>
+          <p>
+            Share tips, seeds, and stories. Learn from experienced gardeners and
+            help newcomers find their green thumbs.
+          </p>
+        </div>
+        <div class="about-card">
+          <div class="icon">🌍</div>
+          <h3>Sustainability</h3>
+          <p>
+            Reduce food miles, support local biodiversity, and grow with the
+            seasons. Every plot is a small step toward a greener future.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plots Section -->
+  <section class="plots" id="plots">
+    <div class="container">
+      <h2>Our Plots</h2>
+      <p class="section-intro">
+        From beginners to seasoned growers, we have space for everyone.
       </p>
 
-      <div class="features-grid">
-        <div class="feature-item">
-          <div class="feature-icon">📍</div>
-          <h3>Prime Location</h3>
-          <p>Easily accessible at the top of Langdale Way in Frodsham</p>
+      <div class="plots-grid">
+        <div class="plot-card">
+          <div class="plot-size">Standard</div>
+          <h3>Raised Bed</h3>
+          <p class="plot-desc">Perfect for beginners and families</p>
+          <ul class="plot-features">
+            <li>2m × 1m bed</li>
+            <li>Water access</li>
+            <li>Tool storage</li>
+            <li>Compost included</li>
+          </ul>
+          <p class="plot-price">£25/year</p>
         </div>
-        <div class="feature-item">
-          <div class="feature-icon">👥</div>
-          <h3>Supportive Community</h3>
-          <p>Connect with nearly 50 passionate plotholders of all ages</p>
+
+        <div class="plot-card featured">
+          <div class="plot-size">Popular</div>
+          <h3>Full Plot</h3>
+          <p class="plot-desc">Most popular choice</p>
+          <ul class="plot-features">
+            <li>5m × 3m space</li>
+            <li>Water access</li>
+            <li>Tool shed access</li>
+            <li>Compost bin</li>
+            <li>Weekly workshops</li>
+          </ul>
+          <p class="plot-price">£50/year</p>
         </div>
-        <div class="feature-item">
-          <div class="feature-icon">🌱</div>
-          <h3>Flexible Sizing</h3>
-          <p>Choose between half plots or full plots - expand as you grow</p>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">🐔</div>
-          <h3>Multi-Purpose</h3>
-          <p>Grow vegetables, keep chickens, and enjoy nature</p>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">🏆</div>
-          <h3>Well-Maintained</h3>
-          <p>Professional site management ensures high standards</p>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">💚</div>
-          <h3>For Everyone</h3>
-          <p>Beginners to experienced gardeners - there's a place for you</p>
+
+        <div class="plot-card">
+          <div class="plot-size">Large</div>
+          <h3>Family Plot</h3>
+          <p class="plot-desc">For the serious grower</p>
+          <ul class="plot-features">
+            <li>10m × 4m space</li>
+            <li>Priority water</li>
+            <li>Tool shed access</li>
+            <li>Compost + manure</li>
+            <li>Mentorship program</li>
+          </ul>
+          <p class="plot-price">£85/year</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About Preview -->
-  <section class="about-preview">
+  <!-- News & Bulletins Section -->
+  <section class="news" id="news">
     <div class="container">
-      <h2>About Townfield</h2>
-      <p class="section-subtitle">A thriving community of growers</p>
+      <h2>Latest News</h2>
+      <p class="section-intro">Updates from the allotment community</p>
 
-      <div class="about-content">
-        <div>
+      <div class="news-featured">
+        {
+          news
+            .filter((post) => post.data.featured)
+            .slice(0, 1)
+            .map((post) => (
+              <article class="featured-post">
+                <div class="featured-icon">{post.data.emoji}</div>
+                <div class="featured-content">
+                  <div class="post-meta">
+                    {post.data.date.toLocaleDateString("en-GB", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </div>
+                  <h3>{post.data.title}</h3>
+                  <p>{post.data.excerpt}</p>
+                  <a href={`/news/${post.slug}`} class="read-more">
+                    Read full story →
+                  </a>
+                </div>
+              </article>
+            ))
+        }
+      </div>
+
+      <div class="news-grid">
+        {
+          news
+            .filter((post) => !post.data.featured)
+            .slice(0, 2)
+            .map((post) => (
+              <article class="news-card">
+                <div class="post-icon">{post.data.emoji}</div>
+                <div class="post-meta">
+                  {post.data.date.toLocaleDateString("en-GB", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </div>
+                <h4>{post.data.title}</h4>
+                <p>{post.data.excerpt}</p>
+                <a href={`/news/${post.slug}`} class="read-more">
+                  Read more →
+                </a>
+              </article>
+            ))
+        }
+      </div>
+
+      <div class="news-footer">
+        <a href="/news" class="cta-button">View All News</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Season Tips Section -->
+  <section class="tips">
+    <div class="container">
+      <h2>This Month's Guide</h2>
+      <div class="tips-grid">
+        <article class="tip-card">
+          <h4>🌱 Plant Now</h4>
           <p>
-            We offer plots to rent for vegetable growing and keeping chickens –
-            along the same lines as a traditional allotment. Whether you're a
-            seasoned gardener or just starting out, we have the perfect plot
-            size for you.
+            <strong>Summer vegetables:</strong> Courgettes, runner beans, tomatoes.
+            Plant seedlings now for late-summer harvests.
           </p>
+        </article>
+        <article class="tip-card">
+          <h4>💧 Water Well</h4>
           <p>
-            Forget the old image of allotments! These days it's often a family
-            event. Grow Your Own is for everyone – from young families to
-            pensioners, all working together in our vibrant community.
+            <strong>Early morning is best:</strong> Water at dawn to reduce evaporation
+            and help roots absorb moisture efficiently.
           </p>
-          <a href="/about" class="btn btn-primary">Learn More About Us</a>
-        </div>
-        <div class="about-image">🌿</div>
+        </article>
+        <article class="tip-card">
+          <h4>🦋 Support Wildlife</h4>
+          <p>
+            <strong>Plant flowers between rows:</strong> Sunflowers and calendula
+            attract pollinators and natural pest controllers.
+          </p>
+        </article>
       </div>
     </div>
   </section>
 </Layout>
+
+<style>
+  /* Override global for home page specific styles if needed */
+  .step-number {
+    background: var(--color-accent);
+    color: white;
+  }
+</style>

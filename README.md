@@ -1,260 +1,391 @@
-# Townfield Allotments Website
+# Community Allotment Website
 
-A modern, responsive multi-page website for Townfield Allotments built with Astro. This is a pure informational website that showcases the allotments with beautiful design and consistent styling across all pages.
+A clean, easy-to-edit Astro website for your community allotment. Built with Astro + Netlify for fast deployment and instant updates.
 
 ## 📁 Project Structure
 
 ```
-src/
-├── layouts/
-│   └── Layout.astro          # Main layout component (shared by all pages)
-└── pages/
-    ├── index.astro           # Home page
-    ├── about.astro           # About page
-    ├── plots.astro           # Plot information page
-    ├── location.astro        # Location & directions page
-    ├── news.astro            # News & updates page
-    └── contact.astro         # Contact form page
+your-allotment-site/
+├── src/
+│   ├── layouts/
+│   │   ├── Layout.astro                 # Main layout template
+│   │   └── PostLayout.astro             # Blog post template
+│   ├── pages/
+│   │   ├── index.astro                  # Home page
+│   │   ├── news/
+│   │   │   └── [slug].astro             # Individual news posts
+│   │   ├── news-listing.astro           # News archive page
+│   │   └── admin-index.astro            # CMS admin panel
+│   ├── content/
+│   │   └── news/                        # News posts (markdown)
+│   │       ├── spring-open-day.md
+│   │       └── water-system.md
+│   ├── styles/
+│   │   └── global.css                   # All styling
+│   └── content.config.ts                # Content schema
+├── public/
+│   ├── admin/
+│   │   └── index.html                   # CMS login interface
+│   └── admin-config.yml                 # CMS configuration
+├── astro.config.mjs                     # Astro configuration
+└── package.json                         # Dependencies
 ```
 
-## 🎨 Design Features
+**Key folders:**
 
-- **Modern Color Scheme**: Forest green (#2d5016) primary with warm golden accents (#e8a84d)
-- **Responsive Design**: Fully mobile-optimized, works beautifully on all screen sizes
-- **Consistent Styling**: Shared layout ensures consistent branding across all pages
-- **Interactive Elements**: Hover effects, smooth transitions, collapsible FAQs
-- **Accessible**: Semantic HTML and good color contrast
+- `src/content/news/` - All news posts as markdown files (created by the CMS)
+- `public/admin/` - CMS admin interface
+- `src/pages/news/` - Dynamic pages for individual news articles
 
-## 📄 Pages Included
+## 🚀 Quick Start
 
-### 1. **Home** (`index.astro`)
-
-- Eye-catching hero section with call-to-action buttons
-- Quick feature highlights
-- About preview section
-- Links to other pages
-
-### 2. **About** (`about.astro`)
-
-- Detailed information about Townfield Allotments
-- Community statistics
-- Our values and mission
-- Information about AFTA (Association of Frodsham Townfield Allotments)
-
-### 3. **Plot Information** (`plots.astro`)
-
-- Details about half plots, full plots, and multiple plot options
-- Comparison table
-- Site guidelines and rules
-- Interactive FAQ section
-- Customer testimonials area ready for content
-
-### 4. **Location** (`location.astro`)
-
-- Full address and contact details
-- Directions by car, bus, bike, and foot
-- Parking information
-- What's nearby (shops, cafes, etc.)
-- Accessibility information
-- Site visit booking information
-
-### 5. **News** (`news.astro`)
-
-- Latest news and updates
-- Newsletter subscription area
-- Featured news section
-- Sample news articles (easily editable)
-
-### 6. **Information** (`contact.astro`)
-
-- Location and access details
-- Hours of operation
-- How to get there
-- Parking information
-- Community information
-- What's nearby
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 16+ installed
-- npm or yarn package manager
-
-### Installation
-
-1. **Set up your Astro project** (if starting fresh):
+### 1. Installation
 
 ```bash
-npm create astro@latest townfield-allotments
-cd townfield-allotments
 npm install
 ```
 
-2. **Replace the source files** with the provided `.astro` files:
-   - Copy `Layout.astro` to `src/layouts/`
-   - Copy all page files to `src/pages/`
-
-3. **Run the development server**:
+### 2. Local Development
 
 ```bash
 npm run dev
 ```
 
-4. **Open in your browser**: Visit `http://localhost:3000`
+Then visit `http://localhost:3000` in your browser.
 
-### Build for Production
+### 3. Deploy to Netlify
+
+**Option A: Using Netlify CLI**
+
+```bash
+npm install -g netlify-cli
+netlify deploy --prod
+```
+
+**Option B: Git-based deployment (recommended)**
+
+1. Push your code to GitHub
+2. Connect your repo to Netlify
+3. Set build command: `astro build`
+4. Set publish directory: `dist`
+5. Deploy on every push automatically
+
+## ✏️ Editing Guide
+
+### Change the Content
+
+#### Hero Section (main headline & CTA)
+
+**File:** `src/pages/index.astro` (lines 6-14)
+
+```astro
+<h1>Where Seeds Become Stories</h1>
+<p class="hero-subtitle">Join our thriving community garden...</p>
+<a href="#join" class="cta-button">Join Us Today</a>
+```
+
+**Edit:** Change the text to your headline and subtitle.
+
+#### News & Bulletins
+
+**File:** `src/pages/index.astro` (lines 3-28)
+
+The site includes a built-in news system for posting updates, event announcements, and community stories. Edit the `news` array at the very top of the file:
+
+```astro
+const news = [
+  {
+    id: 1,
+    title: "Spring Open Day - A Success!",
+    date: "March 15, 2024",
+    excerpt: "Over 50 visitors joined us for our spring open day.",
+    content: "Full story text goes here...",
+    image: "🌿",
+    featured: true  // Set to true to highlight on homepage
+  },
+  // Add more posts here
+];
+```
+
+**How it works:**
+
+- Posts in the array automatically appear on your site
+- Set `featured: true` to highlight a post prominently on the homepage
+- Use `featured: false` for posts that appear in the grid
+- The `/news` page shows all posts
+- Use any emoji that represents your story
+
+**Quick example - announcing an event:**
+
+```astro
+{
+  id: 99,
+  title: "Summer Potluck - July 20th",
+  date: "July 1, 2024",
+  excerpt: "Join us for our annual garden celebration!",
+  content: "We're hosting a summer potluck on July 20th at 3pm. Bring a dish to share and celebrate our amazing community.",
+  image: "🍽️",
+  featured: true
+}
+```
+
+#### About Cards (What you're growing)
+
+**File:** `src/pages/index.astro` (lines 19-44)
+
+Each card has:
+
+- `icon` - Emoji or icon (🥕, 🤝, 🌍, etc.)
+- `h3` - Card title
+- `p` - Card description
+
+Example:
+
+```astro
+<div class="about-card">
+  <div class="icon">🎯</div>
+  <h3>Your Title</h3>
+  <p>Your description here</p>
+</div>
+```
+
+#### Plot Sizes & Pricing
+
+**File:** `src/pages/index.astro` (lines 53-98)
+
+Each plot card includes:
+
+- `plot-size` - Category (Standard, Popular, Large)
+- `h3` - Plot name
+- `plot-desc` - Short description
+- `plot-features` - List of features (Li items)
+- `plot-price` - Annual cost
+
+Update prices, sizes, features, or add/remove plot types.
+
+#### Monthly Tips
+
+**File:** `src/pages/index.astro` (around line 150)
+
+Replace seasonal tips with current gardening advice. Edit emoji, title, and content.
+
+#### Header Navigation
+
+**File:** `src/layouts/Layout.astro` (lines 32-40)
+
+Add or remove navigation links:
+
+```astro
+<a href="/#about">About</a>
+<a href="/#plots">Our Plots</a>
+<a href="/new-page">New Page</a>
+```
+
+#### Footer Contact Info
+
+**File:** `src/layouts/Layout.astro` (lines 59-73)
+
+Update email, address, and hours:
+
+```astro
+<p>
+  📧 your-email@allotment.local<br/>
+  📍 Your Location<br/>
+  Hours: Your hours
+</p>
+```
+
+### Customize Colors & Fonts
+
+**File:** `src/styles/global.css` (lines 1-33)
+
+The design system uses CSS variables. Change colors here:
+
+```css
+--color-primary: #5a7d6b; /* Sage green */
+--color-accent: #7fa66d; /* Growing green */
+--color-neutral: #f8f6f3; /* Warm off-white */
+--color-dark: #2d3631; /* Deep charcoal */
+--color-text: #3d4439; /* Body text color */
+```
+
+**Fonts** are loaded from Google Fonts. To change:
+
+1. Edit `Layout.astro` line 18 (font link)
+2. Update `global.css` lines 20-21 (font-family variables)
+
+### Add New Pages
+
+1. Create a new file: `src/pages/about.astro`
+2. Import the layout:
+
+   ```astro
+   ---
+   import Layout from '../layouts/Layout.astro';
+   ---
+
+   <Layout title="About Us">
+     <section class="about">
+       <div class="container">
+         <h1>About Our Allotment</h1>
+         <!-- Your content here -->
+       </div>
+     </section>
+   </Layout>
+   ```
+
+3. Add link to navigation in `Layout.astro`
+
+### Add Images
+
+1. Place images in `public/images/` folder
+2. Reference in Astro pages:
+   ```astro
+   <img src="/images/your-image.jpg" alt="Description">
+   ```
+
+## 🎨 Design System
+
+### Colors
+
+- **Primary (Sage):** #5A7D6B - Main headings, accents
+- **Accent (Growing Green):** #7FA66D - Buttons, highlights
+- **Light Accent:** #A5C393 - Hover states
+- **Neutral:** #F8F6F3 - Backgrounds
+- **Dark:** #2D3631 - Body text
+
+### Spacing
+
+- `--spacing-sm`: 1rem
+- `--spacing-md`: 1.5rem
+- `--spacing-lg`: 2rem
+- `--spacing-xl`: 3rem
+- `--spacing-2xl`: 4rem
+
+### Typography
+
+- **Display:** Lora (serif) - Headlines
+- **Body:** Inter (sans) - All text
+
+## 📱 Responsive Design
+
+The site automatically adjusts for:
+
+- **Desktop** (1200px+)
+- **Tablet** (768px)
+- **Mobile** (640px)
+
+Test on mobile by opening DevTools (F12) and toggling device toolbar.
+
+## 🔧 Environment Setup
+
+### Required
+
+- Node.js 16+ and npm
+- Code editor (VS Code recommended)
+
+### Useful VS Code Extensions
+
+- Astro language support
+- Prettier (code formatter)
+- Live Server
+
+## 📦 Building for Production
 
 ```bash
 npm run build
 ```
 
-This creates an optimized version in the `dist/` folder ready for deployment.
+This creates a `dist/` folder ready for Netlify.
 
-## 🛠️ Customization
+## 🌐 SEO & Meta Tags
 
-### Colors
+Edit the page title and description in `Layout.astro`:
 
-All colors are defined in CSS variables in the Layout component. To change colors:
-
-1. Open `Layout.astro`
-2. Find the `:root` style section
-3. Modify these variables:
-   - `--primary`: Main green color
-   - `--primary-light`: Lighter green
-   - `--accent`: Golden accent color
-   - `--accent-light`: Lighter gold
-   - `--text-dark`: Dark text color
-   - `--text-light`: Gray text color
-   - `--bg-light`: Light background color
-
-### Content Updates
-
-Each page is straightforward to edit:
-
-- **Home**: Edit the hero section, features, and about preview
-- **About**: Update the community stats, values, and AFTA information
-- **Plots**: Modify plot sizes, features, comparison table, and FAQs
-- **Location**: Update address, directions, parking, and accessibility info
-- **News**: Edit the `newsItems` array at the top of the file
-- **Contact**: Update contact methods and add real email addresses
-
-### News Management
-
-Edit the `newsItems` array in `news.astro` to add/update news:
-
-```javascript
-const newsItems = [
-  {
-    id: 1,
-    date: "Month Year",
-    title: "Article Title",
-    excerpt: "Short summary...",
-    content: "Full article content...",
-    author: "Author Name",
-  },
-  // Add more items...
-];
+```astro
+<Layout title="Your Site Title - Tagline" description="Page description for search engines">
 ```
 
-## 📱 Responsive Features
+## 📝 Tips for Editing
 
-- Mobile-optimized navigation
-- Touch-friendly buttons and links
-- Flexible grid layouts that adapt to screen size
-- Readable font sizes on all devices
+1. **Save and reload** - Browser auto-refreshes in dev mode
+2. **CSS changes** - Edit `global.css` and save; changes apply immediately
+3. **Content changes** - Edit `.astro` files (they look like HTML)
+4. **Back up before major changes** - Use git or copy files
+5. **Test responsively** - Check mobile view often
 
-## ♿ Accessibility
+## 📰 Managing News Posts (Non-Technical)
 
-- Semantic HTML structure
-- Good color contrast ratios
-- Alt text support for images
-- Keyboard navigation support
-- ARIA labels where appropriate
+Your site includes a **Content Management System (CMS)** for adding and editing news posts without coding.
 
-## 🔍 SEO
+### Add a News Post
 
-- Unique page titles and descriptions
-- Semantic HTML
-- Open Graph meta tags ready to add
-- Mobile-friendly design
-- Fast loading times
+1. Visit `https://yoursite.com/admin`
+2. Login with Netlify credentials
+3. Click **News & Bulletins**
+4. Click **New** to create a post
+5. Fill in the form:
+   - **Title** - Headline
+   - **Date** - Publication date
+   - **Featured** - Check to highlight on homepage
+   - **Image Emoji** - Pick a representative emoji
+   - **Excerpt** - Short summary
+   - **Content** - Full story (markdown supported)
+6. Click **Publish** ✅
 
-## 🚀 Deployment
+**Complete guide:** See `CMS-GUIDE.md`
 
-### Deploy to Netlify
+### Set Up CMS for Your Team
 
-1. Push your code to GitHub
-2. Connect your repo to Netlify
-3. Build settings:
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-4. Deploy!
+**Admin setup instructions:** See `ADMIN-SETUP.md`
 
-### Deploy to Vercel
+Quick steps:
 
-1. Import project to Vercel
-2. Vercel automatically detects Astro
-3. Deploy with zero configuration
-
-### Deploy to Other Platforms
-
-The `npm run build` command creates a static site that can be deployed anywhere.
-
-## 🎯 Next Steps
-
-1. **Add Images**: Replace emoji placeholders with real photos of the allotments
-2. **Add Google Maps**: Embed an actual map on the location page
-3. **Analytics**: Add Google Analytics or similar
-4. **Custom Domain**: Add your domain (e.g., townfield-allotments.co.uk)
-5. **Update Content**: Keep the news section updated with latest information
-6. **Expand Resources**: Add growing guides, photo galleries, or additional pages as needed
-
-## 📝 Content Tips
-
-- **About Page**: Add personal stories from plotholders
-- **News Page**: Update regularly with growing tips, community events
-- **Plot Page**: Add before/after photos of plots
-- **Location Page**: Add photos of the site and surrounding area
-- **Contact Page**: Include testimonials from happy plotholders
-
-## 🐛 Troubleshooting
-
-**Navigation links not working?**
-
-- Ensure all `.astro` files are in the `src/pages/` directory
-- File names become URLs (e.g., `about.astro` → `/about`)
-
-**Styling looks broken?**
-
-- Make sure the `Layout.astro` is in `src/layouts/`
-- Check that each page imports the Layout with: `import Layout from '../layouts/Layout.astro';`
-
-**Images not loading?**
-
-- Place images in `src/assets/` and import them in your Astro files
-- Or use external image URLs with `<img src="url">`
-
-## 📚 Resources
-
-- [Astro Documentation](https://docs.astro.build)
-- [CSS Variables Guide](https://developer.mozilla.org/en-US/docs/Web/CSS/--*)
-- [Responsive Design](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
-
-## 💡 Features Ready to Add
-
-- [ ] Photo gallery section with site images
-- [ ] Community member testimonials
-- [ ] Event calendar
-- [ ] Growing guides and resources
-- [ ] Embedded Google Map
-- [ ] Blog system for tips and updates
-- [ ] Dark mode toggle
-- [ ] Multi-language support
-- [ ] PDF resources/guides for download
+1. Enable Netlify Identity in Netlify dashboard
+2. Enable Git Gateway
+3. Invite team members via Netlify
+4. They access `/admin` to edit posts
 
 ---
 
-**Happy Growing! 🌱**
+## 🚀 Deploying Updates
 
-For questions or support, contact your web developer or visit the Astro community forums.
+### Using Netlify
+
+Any push to your main branch automatically redeploys the site.
+
+### Using Netlify CLI
+
+```bash
+netlify deploy --prod
+```
+
+## ❓ Troubleshooting
+
+**Site won't load locally**
+
+```bash
+npm install
+npm run dev
+```
+
+**Changes not showing**
+
+- Hard refresh (Ctrl+Shift+R or Cmd+Shift+R)
+- Clear browser cache
+- Restart dev server
+
+**Build fails**
+
+- Check for typos in `.astro` files
+- Make sure all imports are correct
+- Ensure CSS selectors are valid
+
+## 📞 Support
+
+For Astro docs: https://docs.astro.build
+For Netlify: https://netlify.com/docs
+
+---
+
+**Happy gardening!** 🌱 Make the site your own and watch it grow with your allotment.
