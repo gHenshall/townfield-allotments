@@ -1,0 +1,249 @@
+---
+// Import the layout
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Page Title - Community Allotment">
+  <!-- Hero Section (Optional) -->
+  <!-- <section class="hero">
+    <div class="container">
+      <h1>About Frodsham Townfield Allotments</h1>
+      <!-- <p>Brief description or subtitle</p> -->
+
+
+
+  <!-- Main Content Section -->
+  <section class="content-section">
+    <div class="container">
+      <h2>About Frodsham Townfield Allotments</h2>
+      <p>
+        Advice is always forthcoming from others on the plots and even if it is
+        sometimes contradictory it is always right! The inevitable gluts of
+        produce are always shared so you can go home with rhubarb even if you
+        don't grow it.
+      </p>
+
+      <p>
+        Allotment holders get a great deal of satisfaction from their hobby and
+        it’s great for exercise – so much better than paying a gym sub to
+        exercise indoors with no fresh air. There is tremendous variety in the
+        plots with lots of flowers, fruit trees and chickens as well as the
+        traditional rows of vegetables.
+      </p>
+
+      <p>
+        Even if you have never grown anything before, why not give it a try? If
+        it seems a bit daunting, how about teaming up with someone to share a
+        plot? Other plotholders will be happy to give advice and a bit of help
+        if needed. Spare seeds, plug plants and cuttings are often on offer to
+        help get started.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <h2>A Brief History of AFTA</h2>
+      <p>
+        The site opened at Easter 2011 on what had previously been a farm field.
+        Initially the plots were marked out with pegs and string and from that
+        daunting start has emerged the lively and colourful site that exists
+        today
+      </p>
+      <p>
+        AFTA developed from discussions between the Plot holders and Atlantic
+        Hardware the landowners, to provide more local day to day management of
+        the site and promote and develop it with the wider community in the
+        area. As a result AFTA was established in Nov 2012 with a constitution
+        and committee and initially 30 members.
+      </p>
+      <p>
+        The main aim of the association is to be a collective voice working with
+        the landowners and all our members to develop the plots and facilities
+        on the site, and undertake the day to day maintenance of the field.
+      </p>
+      <p>
+        We look after the communal compost area and cut the grass on the tracks
+        and walkways. We have an association shed and a secure container by the
+        car park known as the Tardis. We organise deliveries of compost and
+        shredded material for paths. We liaised with the Woodland Trust to
+        provide hedge trees which we have planted at the bottom end of the
+        field.
+      </p>
+      <p>
+        Our committee meetings allocate tasks to committee members and plans and
+        ideas to promote, safeguard and improve the allotments. We meet four
+        times a year on average. However, there is always the opportunity to
+        discuss an develop new ideas
+      </p>
+      <p>
+        The Association now has a membership of over 90 and is affiliated to the
+        National Allotment Association. The site has expanded from 30 plots to
+        over 80 plots, plus the Good Shed NHS plot, and a Bee apiary.
+      </p>
+    </div>
+  </section>
+
+  <!-- Grid Section (Optional) -->
+  <section class="content-section">
+    <div class="container">
+      <h2>Things We Do</h2>
+      <div class="grid">
+        <div class="card">
+          <p>
+            Raising the profile of the allotments locally by publicity and
+            adverts
+          </p>
+        </div>
+        <div class="card">
+          <p>
+            Contact with and working with other groups locally and in related
+            areas like the garden club and the Town council allotments
+          </p>
+        </div>
+        <div class="card">
+          <p>
+            Building contacts with local and County Council, Community Police,
+            Frodsham Transition Initiative and members of the local community.
+            Local councillors and the MP have all been on site visits to see
+            what has been achieved at the site
+          </p>
+        </div>
+        <div class="card">
+          <p>Stall at the Frodsham Community event</p>
+        </div>
+        <div class="card">
+          <p>
+            Exploring collaborative events and funding opportunities, contact
+            with other local allotment associations (Kingsley)
+          </p>
+        </div>
+        <div class="card">
+          <p>Site visits from the NW region of the National Association</p>
+        </div>
+        <div class="card">
+          <p>
+            We are working on plans to improve composting facilities at the site
+          </p>
+        </div>
+        <div class="card">
+          <p>
+            We are raising funds to help with provision of a composting toilet
+            and communal hut
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
+    padding: var(--spacing-2xl) 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--color-text);
+  }
+
+  .content-section {
+    padding: var(--spacing-2xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .content-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .content-section h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+  }
+
+  .card {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    transition: var(--transition);
+  }
+
+  .card:hover {
+    border-color: var(--color-accent-light);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .card h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .card p {
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .cta-section {
+    background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
+    padding: var(--spacing-2xl) 0;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .cta-section p {
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.1rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: white;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(127, 166, 109, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--spacing-xl) 0;
+    }
+
+    .content-section {
+      padding: var(--spacing-xl) 0;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

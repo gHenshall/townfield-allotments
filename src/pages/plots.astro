@@ -1,0 +1,233 @@
+---
+// Import the layout
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Page Title - Community Allotment">
+  <!-- Main Content Section -->
+  <section class="content-section">
+    <div class="container">
+      <h2>Plot Information & Frequently Asked Questions</h2>
+      <p>There are 78 plots on site.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Full Plots</h3>
+          <p>Full plots are 14 m x 8.2 m @ £275.00 p.a.</p>
+        </div>
+        <div class="card">
+          <h3>Half Plots</h3>
+          <p>Full plots are 14 m x 4.1 m @ £137.50 p.a.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid Section (Optional) -->
+  <section class="content-section">
+    <div class="container">
+      <h2>Waiting List CLOSED</h2>
+      <p>
+        We have had to come to a decision we’ve not wanted to make. The sheer
+        amount of enquiries we receive from people hoping to join our allotment
+        community is massive, and the monitoring of the list is tough on our
+        volunteers, so for now we have decided to close our waiting list to any
+        new enquiries
+      </p>
+      <p>
+        Those already on the list will remain, and will be contacted, in list
+        order, when plots do come available.
+      </p>
+      <p>
+        We will be sure to let you all know when the list has reached a level
+        where we can open it back up again!
+      </p>
+      <p>
+        Thank you for your understanding and we wish you all well with your
+        garden growing endeavours
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <h2>FAQs</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>HOW MUCH IS THE RENT</h3>
+          <p>
+            Full plots are 14 m x 8.2 m @ £262.50 p.a from April each year. Half
+            plots 14m x 4.1m @ £131.25 p.a.
+          </p>
+        </div>
+        <div class="card">
+          <h3>WHAT CAN I GROW?</h3>
+          <p>Anything, fruit, veg, flower and fruit trees.</p>
+        </div>
+        <div class="card">
+          <h3>CAN I HAVE BARBECUES?</h3>
+          <p>Definitely.</p>
+        </div>
+        <div class="card">
+          <h3>IS THERE A TENANCY AGREEMENT?</h3>
+          <p>Yes there is a simple agreement to sign.</p>
+        </div>
+        <div class="card">
+          <h3>CAN I PAY MY RENT IN INSTALMENTS?</h3>
+          <p>Yes. Please contact AFTA for further information.</p>
+        </div>
+        <div class="card">
+          <h3>TOILETS</h3>
+          <p>
+            Most allotments don’t have any toilet facilities (due to lack of
+            drainage etc). Our site is the same, no drainage. We are currently
+            looking into composting toilets.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>ARE THERE RULES?</h3>
+          <p>
+            There are restrictions on bonfires and cockerels and water hoses. To
+            keep the overall plot sites tidy, no structures built out of window
+            frames or random bits of corrugated iron will be welcome. If there
+            is a 'need', we must find a better looking solution. Please see the
+            Agreement for the site rules.
+          </p>
+        </div>
+        <div class="card">
+          <h3>RAISED BEDS</h3>
+          <p>
+            For those wanting to work at an easier level, raised beds can be
+            used.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>FENCING</h3>
+          <p>Plot holders can fence their own plot with chicken wire.</p>
+        </div>
+
+        <div class="card">
+          <h3>CHILDREN</h3>
+          <p>Are welcome on the site.</p>
+        </div>
+
+        <div class="card">
+          <h3>RUBBISH</h3>
+          <p>Take it home. Only compostable rubbish should be on the site.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .hero {
+      background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
+      padding: var(--spacing-2xl) 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--color-text);
+    }
+
+    .content-section {
+      padding: var(--spacing-2xl) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .content-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .content-section h2 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      border-color: var(--color-accent-light);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .card h3 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .card p {
+      color: var(--color-text);
+      margin: 0;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
+      padding: var(--spacing-2xl) 0;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .cta-section p {
+      color: var(--color-text);
+      margin-bottom: var(--spacing-lg);
+      font-size: 1.1rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--color-accent);
+      color: white;
+      padding: var(--spacing-md) var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(127, 166, 109, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--spacing-xl) 0;
+      }
+
+      .content-section {
+        padding: var(--spacing-xl) 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style></Layout
+>
