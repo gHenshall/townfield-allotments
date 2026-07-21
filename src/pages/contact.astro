@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Information" description="Contact information for Townfield Allotments">
+  <style>
+    .info-section {
+      background-color: var(--white);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      color: var(--white);
+      padding: 2.5rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+    }
+
+    .info-box h3 {
+      color: var(--accent);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      margin-top: 0;
+    }
+
+    .info-box p {
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .info-box strong {
+      color: var(--accent);
+      display: block;
+      font-size: 1.1rem;
+    }
+
+    .info-detail {
+      background-color: var(--bg-light);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+      border-left: 4px solid var(--accent);
+    }
+
+    .info-detail h3 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .info-detail p {
+      color: var(--text-light);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .location-highlight {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      color: var(--white);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .location-highlight h2 {
+      color: var(--white);
+      margin-bottom: 1rem;
+      margin-top: 0;
+    }
+
+    .location-highlight h2::after {
+      background-color: var(--accent);
+    }
+
+    .location-highlight p {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .location-highlight strong {
+      color: var(--accent);
+      font-size: 1.2rem;
+      display: block;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <!-- Page Header -->
+  <section class="info-section">
+    <div class="container">
+      <h2>Information</h2>
+      <p class="section-subtitle">Find out all you need to know about Townfield Allotments</p>
+    </div>
+  </section>
+
+  <!-- Location Highlight -->
+  <section class="info-section">
+    <div class="container">
+      <div class="location-highlight">
+        <h2>Visit Townfield Allotments</h2>
+        <p>Top of Langdale Way, Junction with Town-field Lane</p>
+        <strong>Frodsham WA6 7LX, United Kingdom</strong>
+        <p style="margin-top: 1.5rem; font-size: 1rem; opacity: 0.95;">Open 24/7 • No appointment needed</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Information Boxes -->
+  <section class="info-section">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-box">
+          <h3>📍 Location</h3>
+          <p>Find us at the junction of Langdale Way and Town-field Lane in Frodsham. The site is easily accessible and open around the clock.</p>
+        </div>
+
+        <div class="info-box">
+          <h3>🕐 Hours</h3>
+          <p>
+            <strong>Open 24/7</strong>
+            Year-round access to the site. Visit whenever it suits you.
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>🌿 About Us</h3>
+          <p>Townfield Allotments is managed by AFTA (Association of Frodsham Townfield Allotments) on behalf of the landowner, Atlantic Hardware.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Information -->
+  <section class="info-section">
+    <div class="container">
+      <div class="info-detail">
+        <h3>Getting Here</h3>
+        <p><strong>By Car:</strong> Use postcode WA6 7LX in your satnav. Head to the junction of Langdale Way and Town-field Lane – the allotments are in the field at the top of Langdale Way.</p>
+        <p><strong>By Public Transport:</strong> Local bus services run through Frodsham to the Langdale Way area. It's a short walk from the nearest bus stop.</p>
+        <p><strong>By Bike:</strong> Cycling is a great way to visit. Bike parking is available at the site.</p>
+        <p><strong>On Foot:</strong> The site is walkable from various parts of Frodsham. Just head to the address above.</p>
+      </div>
+
+      <div class="info-detail">
+        <h3>Parking</h3>
+        <p>Car parking is available near the site entrance. Please park considerately to ensure access for emergency vehicles and maintain good relationships with neighboring properties.</p>
+        <p>Bike parking is also available on site for those cycling to visit.</p>
+      </div>
+
+      <div class="info-detail">
+        <h3>Site Access</h3>
+        <p>The allotments are open 24/7, giving you complete flexibility to visit whenever works best for your schedule. Whether you're an early riser or prefer evening visits, the site is always accessible.</p>
+        <p>The site is relatively flat and easy to navigate, with well-maintained pathways throughout.</p>
+      </div>
+
+      <div class="info-detail">
+        <h3>About AFTA</h3>
+        <p>The Association of Frodsham Townfield Allotments (AFTA) manages the day-to-day operations of the allotments. AFTA handles plot management, site maintenance, and works to ensure high standards across the site while fostering a strong community atmosphere.</p>
+      </div>
+
+      <div class="info-detail">
+        <h3>Our Community</h3>
+        <p>Townfield Allotments is home to nearly 50 plotholders of all ages, from young families to pensioners. We're a diverse and supportive community dedicated to growing food, keeping animals, and building connections.</p>
+        <p>Whether you're interested in vegetables, keeping chickens, or simply enjoying nature and meeting neighbors, there's always something happening at Townfield.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Nearby -->
+  <section class="info-section">
+    <div class="container">
+      <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem;">What's Nearby</h3>
+      
+      <div class="info-grid">
+        <div style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛒</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Local Shops</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">Frodsham town center offers a range of shops and services within easy reach</p>
+        </div>
+
+        <div style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">☕</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Cafes & Restaurants</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">Enjoy refreshments before or after visiting the allotments</p>
+        </div>
+
+        <div style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌳</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Green Spaces</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">Beautiful countryside and parks are within easy reach</p>
+        </div>
+
+        <div style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🚂</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Transport Links</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">Frodsham railway station and road connections are convenient</p>
+        </div>
+
+        <div style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏥</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Medical Services</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">Local health facilities and emergency services are nearby</p>
+        </div>
+
+        <div style="background-color: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">📚</div>
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Community Facilities</h4>
+          <p style="color: var(--text-light); font-size: 0.95rem;">Library, schools, and other community resources are close by</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
