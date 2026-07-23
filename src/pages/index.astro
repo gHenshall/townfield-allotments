@@ -1,6 +1,17 @@
 ---
 // Import the layout
 import Layout from "../layouts/Layout.astro";
+import droneImage from "../images/drone.jpg";
+import welcomeImage from "../images/welcome.jpg";
+
+import "swiper/css";
+import "swiper/css/autoplay";
+
+import { register } from "swiper/element/bundle";
+
+register();
+
+const images = [droneImage, welcomeImage];
 ---
 
 <Layout title="Page Title - Community Allotment">
@@ -8,7 +19,12 @@ import Layout from "../layouts/Layout.astro";
   <section class="hero">
     <div class="container">
       <h1>Welome to Frodsham Townfield Allotments</h1>
-      <p>Add Image Here</p>
+
+      <img
+        src="../src/images/drone.jpg"
+        alt="Frodsham Townfield Allotments"
+        style="max-width: 100%; height: auto;"
+      />
     </div>
   </section>
 
@@ -72,6 +88,30 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </section>
 
+  <section class="content-section">
+    <div class="container">
+      <h2>Waiting List CLOSED</h2>
+      <p>
+        We have had to come to a decision we’ve not wanted to make. The sheer
+        amount of enquiries we receive from people hoping to join our allotment
+        community is massive, and the monitoring of the list is tough on our
+        volunteers, so for now we have decided to close our waiting list to any
+        new enquiries
+      </p>
+      <p>
+        Those already on the list will remain, and will be contacted, in list
+        order, when plots do come available.
+      </p>
+      <p>
+        We will be sure to let you all know when the list has reached a level
+        where we can open it back up again!
+      </p>
+      <p>
+        Thank you for your understanding and we wish you all well with your
+        garden growing endeavours
+      </p>
+    </div>
+  </section>
   <style>
     .hero {
       background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
