@@ -28,12 +28,17 @@ const { title, description = "Growing together" } = Astro.props;
     <header class="header">
       <div class="header-container">
         <!-- Logo -->
-        <a href="/" class="logo">
-          🌱 Allotment
-        </a>
+        <a href="/" class="logo"> 🌱 Allotment </a>
+
+        <!-- Hamburger Button (Mobile Only) -->
+        <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
         <!-- Navigation -->
-        <nav class="nav">
+        <nav class="nav" id="navMenu">
           <a href="/about" class="nav-link">About</a>
           <a href="/location" class="nav-link">Location</a>
           <a href="/plots" class="nav-link">Our Plots</a>
@@ -58,9 +63,32 @@ const { title, description = "Growing together" } = Astro.props;
     <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-container">
-        <p>&copy; 2026 Frodsham Townfield Allotments. All things grow in their time.</p>
+        <p>
+          &copy; 2026 Frodsham Townfield Allotments. All things grow in their
+          time.
+        </p>
       </div>
     </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuToggle = document.getElementById("menuToggle");
+      const navMenu = document.getElementById("navMenu");
+
+      menuToggle?.addEventListener("click", () => {
+        navMenu?.classList.toggle("active");
+        menuToggle.classList.toggle("active");
+      });
+
+      // Close menu when a link is clicked
+      const navLinks = document.querySelectorAll(".nav-link, .nav-facebook");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu?.classList.remove("active");
+          menuToggle?.classList.remove("active");
+        });
+      });
+    </script>
   </body>
 </html>
 
@@ -98,10 +126,10 @@ const { title, description = "Growing together" } = Astro.props;
   .header-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 2rem;
   }
 
   .logo {
@@ -114,12 +142,46 @@ const { title, description = "Growing together" } = Astro.props;
     align-items: center;
     gap: 0.5rem;
     transition: color 0.3s ease;
+    flex-shrink: 0;
   }
 
   .logo:hover {
     color: var(--color-accent);
   }
 
+  /* HAMBURGER MENU */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    gap: 6px;
+    z-index: 101;
+  }
+
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-primary);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+
+  /* NAVIGATION */
   .nav {
     display: flex;
     gap: 2.5rem;
@@ -197,48 +259,84 @@ const { title, description = "Growing together" } = Astro.props;
     line-height: 1.6;
   }
 
-  /* RESPONSIVE */
+  /* MOBILE RESPONSIVE */
   @media (max-width: 768px) {
     .header-container {
-      flex-direction: column;
-      gap: 1.5rem;
       padding: 1rem;
-    }
-
-    .nav {
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-      align-items: flex-start;
-    }
-
-    .nav-link {
-      width: 100%;
-      padding: 0.5rem 0;
-    }
-
-    .nav-facebook {
-      width: 100%;
-      text-align: center;
+      position: relative;
     }
 
     .logo {
       font-size: 1.1rem;
     }
+
+    /* Show hamburger on mobile */
+    .hamburger {
+      display: flex;
+    }
+
+    /* Hide nav by default on mobile */
+    .nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem;
+      background-color: var(--color-neutral);
+      border-bottom: 2px solid var(--color-accent-light);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    /* Show nav when active */
+    .nav.active {
+      max-height: 500px;
+    }
+
+    .nav-link {
+      width: 100%;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-link::after {
+      display: none;
+    }
+
+    .nav-link:hover {
+      color: var(--color-accent);
+      padding-left: 1rem;
+    }
+
+    .nav-facebook {
+      width: 100%;
+      text-align: center;
+      border: none;
+    }
   }
 
   @media (max-width: 480px) {
     .header-container {
-      padding: 1rem;
-    }
-
-    .nav {
-      gap: 0.75rem;
+      padding: 1rem 0.75rem;
     }
 
     .logo {
       font-size: 1rem;
     }
+
+    .nav {
+      /* ... */
+      visibility: hidden;
+      transition:
+        max-height 0.3s ease,
+        visibility 0.3s ease;
+    }
+
+    .nav.active {
+      visibility: visible;
+    }
   }
 </style>
-</Layout>
