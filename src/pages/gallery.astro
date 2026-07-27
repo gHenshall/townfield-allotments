@@ -1,0 +1,214 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Gallery configuration - add/update with your gallery folders
+const galleryConfig = [
+  {
+    id: "july26",
+    title: "July On the Site",
+    description: "Photos from around the site. From Hay, C11.",
+  },
+  {
+    id: "openday26",
+    title: "Allotment Open Day 2026",
+    description: "A collection of highlights from our annual open day on July 18th 2026.",
+  },
+];
+
+// Dynamically load images from each gallery folder in src/images/
+const imageModules = import.meta.glob("../images/*/*.{png,jpg,jpeg,gif,webp}", {
+  eager: true,
+});
+
+// Build gallery data with images from folders
+const galleries = galleryConfig.map((config) => {
+  // Find all images in this gallery's folder
+  const galleryImages = Object.entries(imageModules)
+    .filter(([path]) => path.includes(`/images/${config.id}/`))
+    .sort(([pathA], [pathB]) => pathA.localeCompare(pathB));
+
+  // Get first image as thumbnail, fallback to placeholder
+  const thumbnail =
+    galleryImages.length > 0
+      ? (galleryImages[0][1] as any).default
+      : 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="450"%3E%3Crect fill="%23ddd" width="600" height="450"/%3E%3C/svg%3E';
+
+  return {
+    id: config.id,
+    title: config.title,
+    description: config.description,
+    thumbnail: thumbnail,
+    count: galleryImages.length,
+  };
+});
+---
+
+<Layout title="Galleries - Community Allotment">
+  <div class="hero">
+    <h1>Collections</h1>
+    <p>Explore our curated galleries</p>
+  </div>
+
+  <div class="content-section">
+    <div class="container">
+      <div class="galleries-grid">
+        {
+          galleries.map((gallery) => (
+            <a href={`/gallery/${gallery.id}`} class="gallery-card">
+              <div class="gallery-card-image">
+                <img src={gallery.thumbnail.src} alt={gallery.title} />
+                <div class="gallery-card-overlay">
+                  <div class="overlay-content">
+                    <h3>{gallery.title}</h3>
+                    <p>{gallery.description}</p>
+                    <div class="gallery-meta">→ {gallery.count} images</div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .hero {
+      background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
+      padding: var(--spacing-2xl) 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--color-text);
+    }
+
+    .content-section {
+      padding: var(--spacing-2xl) 0;
+    }
+
+    .galleries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+    }
+
+    .gallery-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: white;
+      border: 1px solid var(--color-border);
+      text-decoration: none;
+      color: inherit;
+      aspect-ratio: 4/3;
+      transition: var(--transition);
+    }
+
+    .gallery-card:hover {
+      border-color: var(--color-accent-light);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .gallery-card-image {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .gallery-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease-out;
+    }
+
+    .gallery-card:hover .gallery-card-image img {
+      transform: scale(1.1);
+      filter: brightness(0.75);
+    }
+
+    .gallery-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
+      display: flex;
+      align-items: flex-end;
+      padding: var(--spacing-lg);
+      opacity: 0;
+      transition: opacity 0.35s ease-out;
+    }
+
+    .gallery-card:hover .gallery-card-overlay {
+      opacity: 1;
+    }
+
+    .overlay-content {
+      width: 100%;
+      color: white;
+    }
+
+    .overlay-content h3 {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-sm);
+      letter-spacing: -0.5px;
+    }
+
+    .overlay-content p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: var(--spacing-md);
+      margin: 0 0 var(--spacing-md) 0;
+    }
+
+    .gallery-meta {
+      display: flex;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--spacing-xl) 0;
+      }
+
+      .content-section {
+        padding: var(--spacing-xl) 0;
+      }
+
+      .galleries-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-card-overlay {
+        opacity: 1;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.4) 0%,
+          rgba(0, 0, 0, 0.7) 100%
+        );
+      }
+
+      .overlay-content h3 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</Layout>
