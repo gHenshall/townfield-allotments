@@ -24,36 +24,221 @@ const { title, description = "Growing together" } = Astro.props;
     />
   </head>
   <body>
+    <!-- HEADER -->
     <header class="header">
-      <div class="container">
-        <div class="logo">
-          <a href="/">🌱 Allotment</a>
-        </div>
+      <div class="header-container">
+        <!-- Logo -->
+        <a href="/" class="logo">
+          🌱 Allotment
+        </a>
+
+        <!-- Navigation -->
         <nav class="nav">
-          <!-- <a href="#about">About</a> -->
-          <a href=`../about`>About</a>
-          <a href=`../location`>Location</a>
-          <a href=`../plots`>Our Plots</a>
-          <a href=`../gallery`>Gallery</a>
-          <a href=`../news`>News</a>
+          <a href="/about" class="nav-link">About</a>
+          <a href="/location" class="nav-link">Location</a>
+          <a href="/plots" class="nav-link">Our Plots</a>
+          <a href="/gallery" class="nav-link">Gallery</a>
+          <a href="/news" class="nav-link">News</a>
           <a
-            href=`https://www.facebook.com/profile.php?id=100080927293467#`
-            target="blank">Facebook</a
+            href="https://www.facebook.com/profile.php?id=100080927293467"
+            class="nav-facebook"
+            target="_blank"
           >
+            Facebook
+          </a>
         </nav>
       </div>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main>
       <slot />
     </main>
 
+    <!-- FOOTER -->
     <footer class="footer">
-      <div class="container">
-        <div class="footer-bottom">
-          <p>&copy; 2026 Community Allotment. All things grow in their time.</p>
-        </div>
+      <div class="footer-container">
+        <p>&copy; 2026 Frodsham Townfield Allotments. All things grow in their time.</p>
       </div>
     </footer>
   </body>
 </html>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background-color: var(--color-neutral);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background-color: var(--color-neutral);
+    border-bottom: 2px solid var(--color-accent-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .logo:hover {
+    color: var(--color-accent);
+  }
+
+  .nav {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .nav-link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-accent);
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-facebook {
+    color: white;
+    background-color: var(--color-accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .nav-facebook:hover {
+    background-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(127, 166, 109, 0.3);
+  }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    background-color: var(--color-neutral);
+  }
+
+  /* FOOTER */
+  .footer {
+    background-color: var(--color-primary-dark);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    .nav {
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      align-items: flex-start;
+    }
+
+    .nav-link {
+      width: 100%;
+      padding: 0.5rem 0;
+    }
+
+    .nav-facebook {
+      width: 100%;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-container {
+      padding: 1rem;
+    }
+
+    .nav {
+      gap: 0.75rem;
+    }
+
+    .logo {
+      font-size: 1rem;
+    }
+  }
+</style>
+</Layout>

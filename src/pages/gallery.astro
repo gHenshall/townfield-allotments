@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-// Gallery configuration - add/update with your gallery folders
+// Gallery configuration
 const galleryConfig = [
   {
     id: "july26",
@@ -15,19 +15,17 @@ const galleryConfig = [
   },
 ];
 
-// Dynamically load images from each gallery folder in src/images/
+// Dynamically load images from each gallery folder
 const imageModules = import.meta.glob("../images/*/*.{png,jpg,jpeg,gif,webp}", {
   eager: true,
 });
 
 // Build gallery data with images from folders
 const galleries = galleryConfig.map((config) => {
-  // Find all images in this gallery's folder
   const galleryImages = Object.entries(imageModules)
     .filter(([path]) => path.includes(`/images/${config.id}/`))
     .sort(([pathA], [pathB]) => pathA.localeCompare(pathB));
 
-  // Get first image as thumbnail, fallback to placeholder
   const thumbnail =
     galleryImages.length > 0
       ? (galleryImages[0][1] as any).default
@@ -43,171 +41,114 @@ const galleries = galleryConfig.map((config) => {
 });
 ---
 
-<Layout title="Galleries - Community Allotment">
-  <div class="hero">
-    <h1>Collections</h1>
-    <p>Explore our curated galleries</p>
-  </div>
-
-  <div class="content-section">
+<Layout title="Gallery - Frodsham Townfield Allotments">
+  <!-- GALLERY GRID -->
+  <section style="background-color: var(--color-neutral); padding: var(--spacing-2xl) 0;">
     <div class="container">
-      <div class="galleries-grid">
-        {
-          galleries.map((gallery) => (
-            <a href={`/gallery/${gallery.id}`} class="gallery-card">
-              <div class="gallery-card-image">
-                <img src={gallery.thumbnail.src} alt={gallery.title} />
-                <div class="gallery-card-overlay">
-                  <div class="overlay-content">
-                    <h3>{gallery.title}</h3>
-                    <p>{gallery.description}</p>
-                    <div class="gallery-meta">→ {gallery.count} images</div>
-                  </div>
-                </div>
+      <h2 style="color: var(--color-primary); text-align: center; margin-bottom: var(--spacing-xl);">
+        Photo Collections
+      </h2>
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg);"
+      >
+        {galleries.map((gallery) => (
+          <a
+            href={`/gallery/${gallery.id}`}
+            class="gallery-card"
+            style="text-decoration: none; display: block; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent);"
+          >
+            <div
+              style="position: relative; overflow: hidden; height: 300px; background: linear-gradient(135deg, var(--color-neutral) 0%, var(--color-accent-light) 100%);"
+            >
+              <img
+                src={gallery.thumbnail.src}
+                alt={gallery.title}
+                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
+              />
+              <div
+                style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;"
+              >
+                <span
+                  style="color: white; font-weight: 600; font-size: 1.1rem;"
+                >
+                  View ({gallery.count} photos)
+                </span>
               </div>
-            </a>
-          ))
-        }
+            </div>
+            <div style="padding: var(--spacing-lg); background-color: white;">
+              <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm); margin-top: 0;">
+                {gallery.title}
+              </h3>
+              <p style="color: var(--color-text); margin: 0; line-height: 1.6; font-size: 0.95rem;">
+                {gallery.description}
+              </p>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section
+    style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%); color: white; padding: var(--spacing-2xl) 0; text-align: center;"
+  >
+    <div class="container">
+      <h2 style="color: white; margin-bottom: var(--spacing-md);">
+        Share Your Photos
+      </h2>
+      <p style="color: white; margin-bottom: var(--spacing-lg); font-size: 1.1rem;">
+        Have great photos from the allotment? Share them with us!
+      </p>
+      <a
+        href="https://www.facebook.com/profile.php?id=100080927293467"
+        target="_blank"
+        style="display: inline-block; background-color: #ffffff; color: var(--color-primary); padding: var(--spacing-md) var(--spacing-xl); border-radius: var(--radius); text-decoration: none; font-weight: 600; transition: var(--transition);"
+        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 16px rgba(0,0,0,0.2)';"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+      >
+        Message Us on Facebook
+      </a>
+    </div>
+  </section>
 
   <style>
-    .hero {
-      background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
-      padding: var(--spacing-2xl) 0;
-      text-align: center;
-    }
-
-    .hero h1 {
-      color: var(--color-primary);
-      margin-bottom: var(--spacing-md);
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--color-text);
-    }
-
-    .content-section {
-      padding: var(--spacing-2xl) 0;
-    }
-
-    .galleries-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: var(--spacing-lg);
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
     }
 
     .gallery-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-lg);
-      background: white;
-      border: 1px solid var(--color-border);
-      text-decoration: none;
-      color: inherit;
-      aspect-ratio: 4/3;
-      transition: var(--transition);
+      cursor: pointer;
     }
 
     .gallery-card:hover {
-      border-color: var(--color-accent-light);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      transform: translateY(-4px);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
-    .gallery-card-image {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
+    .gallery-card:hover img {
+      transform: scale(1.05);
     }
 
-    .gallery-card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease-out;
-    }
-
-    .gallery-card:hover .gallery-card-image img {
-      transform: scale(1.1);
-      filter: brightness(0.75);
-    }
-
-    .gallery-card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(0, 0, 0, 0.3) 0%,
-        rgba(0, 0, 0, 0.6) 100%
-      );
-      display: flex;
-      align-items: flex-end;
-      padding: var(--spacing-lg);
-      opacity: 0;
-      transition: opacity 0.35s ease-out;
-    }
-
-    .gallery-card:hover .gallery-card-overlay {
-      opacity: 1;
-    }
-
-    .overlay-content {
-      width: 100%;
-      color: white;
-    }
-
-    .overlay-content h3 {
-      color: white;
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: var(--spacing-sm);
-      letter-spacing: -0.5px;
-    }
-
-    .overlay-content p {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: var(--spacing-md);
-      margin: 0 0 var(--spacing-md) 0;
-    }
-
-    .gallery-meta {
-      display: flex;
-      align-items: center;
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 0.85rem;
-      font-weight: 500;
+    .gallery-card:hover div[style*="opacity: 0"] {
+      opacity: 1 !important;
     }
 
     @media (max-width: 768px) {
-      .hero {
-        padding: var(--spacing-xl) 0;
+      .container {
+        padding: 0 var(--spacing-md);
       }
 
-      .content-section {
-        padding: var(--spacing-xl) 0;
+      h2 {
+        font-size: 1.75rem;
       }
+    }
 
-      .galleries-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-card-overlay {
-        opacity: 1;
-        background: linear-gradient(
-          135deg,
-          rgba(0, 0, 0, 0.4) 0%,
-          rgba(0, 0, 0, 0.7) 100%
-        );
-      }
-
-      .overlay-content h3 {
-        font-size: 1.3rem;
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 var(--spacing-sm);
       }
     }
   </style>

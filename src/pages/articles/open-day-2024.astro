@@ -1,164 +1,351 @@
 ---
-// Import the layout
 import Layout from "../../layouts/Layout.astro";
+import header from "../../images/openday24/000.jpg";
+import scarecrow from "../../images/openday24/001.jpg";
 ---
 
-<Layout title="Page Title - Community Allotment">
-  <!-- Hero Section (Optional) -->
-  <section class="hero">
+<Layout title="Allotment Open Day – 31st August 2024 | Townfield Allotments">
+  <!-- ============================================================
+       HERO SECTION - Event Header
+       ============================================================ -->
+  <section
+    class="hero"
+    style="background: linear-gradient(135deg, var(--color-neutral) 0%, var(--color-accent-light) 100%);"
+  >
     <div class="container">
-      <h1>Page Title</h1>
-      <p>Brief description or subtitle</p>
+      <div style="text-align: center;">
+        <p
+          style="color: var(--color-text-secondary); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--spacing-sm); font-weight: 600;"
+        >
+          📅 Past Event • 31st August 2024
+        </p>
+        <h1
+          style="color: var(--color-primary); margin-bottom: var(--spacing-md);"
+        >
+          Allotment Open Day
+        </h1>
+        <p
+          style="color: var(--color-text); font-size: 1.1rem; line-height: 1.8; max-width: 700px; margin: 0 auto;"
+        >
+          A day of celebration, community, and sunshine
+        </p>
+      </div>
+      <img
+        src={header.src}
+        alt="Frodsham Townfield Allotments"
+        style="max-width: 100%; height: auto;"
+      />
     </div>
   </section>
 
-  <!-- Main Content Section -->
-  <section class="content-section">
+  <!-- ============================================================
+       MAIN EVENT SUMMARY
+       ============================================================ -->
+  <section style="background-color: #ffffff; padding: var(--spacing-2xl) 0;">
     <div class="container">
-      <h2>Section Heading</h2>
-      <p>Your content goes here.</p>
-    </div>
-  </section>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <p
+          style="font-size: 1.1rem; line-height: 1.8; color: var(--color-text); margin-bottom: var(--spacing-lg);"
+        >
+          We couldn't have asked for a better day as our annual Allotment Day
+          wrapped up summer with glorious weather and an incredible turnout. The
+          community came together to celebrate all that makes our allotment
+          special.
+        </p>
 
-  <!-- Grid Section (Optional) -->
-  <section class="content-section">
-    <div class="container">
-      <h2>Feature Cards</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Card Title 1</h3>
-          <p>Card description or content</p>
-        </div>
-        <div class="card">
-          <h3>Card Title 2</h3>
-          <p>Card description or content</p>
-        </div>
-        <div class="card">
-          <h3>Card Title 3</h3>
-          <p>Card description or content</p>
+        <div
+          style="background-color: var(--color-neutral); padding: var(--spacing-lg); border-radius: var(--radius-lg); border-left: 4px solid var(--color-accent); margin-bottom: var(--spacing-xl);"
+        >
+          <p style="margin: 0; color: var(--color-text);">
+            <strong style="color: var(--color-primary);"
+              >Thank you to our amazing sponsors and volunteers</strong
+            > who made this day possible: Motor World, Whitmore & White, Libby's Wine,
+            Greyturtle Digital Marketing, Flourish of Sutton Weaver Florists, Costa,
+            Gleaves, Rotary Club, and all our generous community members!
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Section (Optional) -->
-  <section class="cta-section">
+  <!-- ============================================================
+       ACTIVITY HIGHLIGHTS - Feature Cards
+       ============================================================ -->
+  <section
+    style="background-color: var(--color-neutral); padding: var(--spacing-2xl) 0;"
+  >
     <div class="container">
-      <h2>Ready to Get Involved?</h2>
-      <p>Contact us for more information</p>
-      <a href="mailto:hello@allotment.local" class="btn-primary">Get In Touch</a
+      <h2
+        style="color: var(--color-primary); text-align: center; margin-bottom: var(--spacing-xl);"
       >
+        What Made the Day Special
+      </h2>
+
+      <!-- Raffle -->
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-xl);"
+      >
+        <div
+          class="card"
+          style="border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);"
+        >
+          <div style="font-size: 2.5rem; margin-bottom: var(--spacing-md);">
+            🎫
+          </div>
+          <h3
+            style="color: var(--color-primary); margin-bottom: var(--spacing-md);"
+          >
+            Raffle
+          </h3>
+          <p style="color: var(--color-text); margin: 0; line-height: 1.7;">
+            The raffle was one of the most anticipated events of the day,
+            bringing plenty of excitement and support from the community. Huge
+            thanks to all our generous sponsors!
+          </p>
+        </div>
+
+        <!-- Cake Station -->
+        <div
+          class="card"
+          style="border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);"
+        >
+          <div style="font-size: 2.5rem; margin-bottom: var(--spacing-md);">
+            🎂
+          </div>
+          <h3
+            style="color: var(--color-primary); margin-bottom: var(--spacing-md);"
+          >
+            Cake Station
+          </h3>
+          <p style="color: var(--color-text); margin: 0; line-height: 1.7;">
+            A bounty of delicious homemade cakes from our allotment holders,
+            plus a fantastic barbecue thanks to Rotary Club. The sizzling aroma
+            was mouth-watering!
+          </p>
+        </div>
+
+        <!-- Kiddies Corner -->
+        <div
+          class="card"
+          style="border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);"
+        >
+          <div style="font-size: 2.5rem; margin-bottom: var(--spacing-md);">
+            👧
+          </div>
+          <h3
+            style="color: var(--color-primary); margin-bottom: var(--spacing-md);"
+          >
+            Kiddies Corner
+          </h3>
+          <p style="color: var(--color-text); margin: 0; line-height: 1.7;">
+            Rock painting, sun-catcher butterfly wings, bulb planting, and face
+            painting kept children entertained and engaged with nature all
+            afternoon.
+          </p>
+        </div>
+      </div>
+
+      <!-- Scarecrow Trail - Featured -->
+      <div
+        style="background: white; border: 2px solid var(--color-terracotta); border-top: 4px solid var(--color-terracotta); border-radius: var(--radius-lg); padding: var(--spacing-lg); box-shadow: 0 8px 24px rgba(193, 114, 79, 0.15);"
+      >
+        <!-- Main layout: Content left, Image right -->
+        <div
+          style="display: grid; grid-template-columns: 1fr 300px; gap: var(--spacing-xl); align-items: start;"
+        >
+          <!-- Left side: Content -->
+          <div
+            style="display: grid; grid-template-columns: 80px 1fr; gap: var(--spacing-lg); align-items: start;"
+          >
+            <!-- Emoji -->
+            <div style="font-size: 3.5rem; line-height: 1;">🌻</div>
+
+            <!-- Text content -->
+            <div>
+              <div
+                style="display: inline-block; background-color: var(--color-terracotta); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin-bottom: var(--spacing-sm);"
+              >
+                ⭐ HIGHLIGHT
+              </div>
+              <h3
+                style="color: var(--color-primary); margin: var(--spacing-sm) 0;"
+              >
+                Scarecrow Trail
+              </h3>
+              <p
+                style="color: var(--color-text); line-height: 1.7; margin: 0;"
+              >
+                Families loved uncovering the hidden anagram—sunflower seeds—as
+                they explored the allotments visiting each plot to spot the
+                inventive scarecrows crafted by our talented community members. A
+                delightful way to engage everyone, young and old!
+              </p>
+            </div>
+          </div>
+
+          <!-- Right side: Image -->
+          <div>
+            <img
+              src={scarecrow.src}
+              alt="Scarecrow Trail - Families exploring the allotments"
+              style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);"
+            />
+            <p
+              style="font-size: 0.85rem; color: var(--color-text-secondary); text-align: center; margin-top: var(--spacing-sm); margin-bottom: 0;"
+            >
+              Scarecrow Trail 2024
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- ============================================================
+       DETAILED ACTIVITY BREAKDOWN
+       ============================================================ -->
+  <section style="background-color: #ffffff; padding: var(--spacing-2xl) 0;">
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <h2
+          style="color: var(--color-primary); margin-bottom: var(--spacing-xl);"
+        >
+          Activities & Highlights
+        </h2>
+
+        <!-- Face Painting -->
+        <div
+          style="margin-bottom: var(--spacing-xl); padding-bottom: var(--spacing-xl); border-bottom: 1px solid var(--color-border);"
+        >
+          <h3
+            style="color: var(--color-primary); margin-bottom: var(--spacing-md);"
+          >
+            🎨 Face Painting
+          </h3>
+          <p style="color: var(--color-text); line-height: 1.8; margin: 0;">
+            From beautiful butterflies to fierce tigers, our talented face
+            painters brought smiles to everyone who stopped by. It was lovely to
+            see so many colourful faces around the allotment!
+          </p>
+        </div>
+
+        <!-- Rock Painting -->
+        <div
+          style="margin-bottom: var(--spacing-xl); padding-bottom: var(--spacing-xl); border-bottom: 1px solid var(--color-border);"
+        >
+          <h3
+            style="color: var(--color-primary); margin-bottom: var(--spacing-md);"
+          >
+            🪨 Rock Painting
+          </h3>
+          <p
+            style="color: var(--color-text); line-height: 1.8; margin-bottom: var(--spacing-md);"
+          >
+            A big thank you to <strong>@FrodshamRocks</strong> for hosting this hugely
+            popular activity! Young visitors had a fantastic time unleashing their
+            creativity onto their chosen rocks and each went home with their own precious
+            keepsake from the day.
+          </p>
+          <p
+            style="color: var(--color-text-secondary); font-style: italic; margin: 0;"
+          >
+            Keep your eyes peeled when wandering around Frodsham for any more
+            #FrodshamRocks hidden gems!
+          </p>
+        </div>
+
+        <!-- Suncatcher Butterfly Wings -->
+        <div style="margin-bottom: 0;">
+          <h3
+            style="color: var(--color-primary); margin-bottom: var(--spacing-md);"
+          >
+            🦋 Suncatcher Butterfly Wings
+          </h3>
+          <p style="color: var(--color-text); line-height: 1.8;">
+            Children had a wonderful time bringing their own set of butterfly
+            wings to life. The vibrant translucent materials of the suncatchers
+            gleamed beautifully in the light, casting rainbow reflections onto
+            the ground. If you'd like to make a set of your own, there are <a
+              href="https://www.hobbycraft.co.uk/ideas/how-to-make-suncatcher-butterfly+wings.html"
+              target="blank"
+              style="color: var(--color-accent); font-weight: 600;"
+              >many resources online</a
+            > to help you get started!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       METADATA
+       ============================================================ -->
+  <section
+    style="background-color: var(--color-neutral); padding: var(--spacing-xl) 0; text-align: center;"
+  >
+    <div class="container">
+      <p
+        style="color: var(--color-text-secondary); font-size: 0.9rem; margin: 0;"
+      >
+        Posted on 25th October 2024 by Will Moran
+      </p>
+    </div>
+  </section>
+
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+    }
+
+    .card {
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Responsive featured section with image */
+    @media (max-width: 960px) {
+      div[style*="grid-template-columns: 1fr 300px"] {
+        grid-template-columns: 1fr 250px !important;
+        gap: var(--spacing-lg) !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 var(--spacing-md);
+      }
+
+      h2 {
+        font-size: 1.75rem;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+      }
+
+      div[style*="grid-template-columns: 1fr 300px"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 var(--spacing-sm);
+      }
+
+      div[style*="display: flex"] {
+        flex-direction: column !important;
+      }
+
+      div[style*="display: flex"] a {
+        width: 100% !important;
+      }
+    }
+  </style>
 </Layout>
-
-<style>
-  .hero {
-    background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
-    padding: var(--spacing-2xl) 0;
-    text-align: center;
-  }
-
-  .hero h1 {
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .hero p {
-    font-size: 1.1rem;
-    color: var(--color-text);
-  }
-
-  .content-section {
-    padding: var(--spacing-2xl) 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .content-section:last-of-type {
-    border-bottom: none;
-  }
-
-  .content-section h2 {
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-lg);
-    text-align: center;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-xl);
-  }
-
-  .card {
-    background: #ffffff;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    transition: var(--transition);
-  }
-
-  .card:hover {
-    border-color: var(--color-accent-light);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  }
-
-  .card h3 {
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .card p {
-    color: var(--color-text);
-    margin: 0;
-  }
-
-  .cta-section {
-    background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
-    padding: var(--spacing-2xl) 0;
-    text-align: center;
-  }
-
-  .cta-section h2 {
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .cta-section p {
-    color: var(--color-text);
-    margin-bottom: var(--spacing-lg);
-    font-size: 1.1rem;
-  }
-
-  .btn-primary {
-    display: inline-block;
-    background-color: var(--color-accent);
-    color: white;
-    padding: var(--spacing-md) var(--spacing-xl);
-    border-radius: var(--radius-lg);
-    text-decoration: none;
-    font-weight: 600;
-    transition: var(--transition);
-  }
-
-  .btn-primary:hover {
-    background-color: var(--color-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(127, 166, 109, 0.2);
-  }
-
-  @media (max-width: 768px) {
-    .hero {
-      padding: var(--spacing-xl) 0;
-    }
-
-    .content-section {
-      padding: var(--spacing-xl) 0;
-    }
-
-    .grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

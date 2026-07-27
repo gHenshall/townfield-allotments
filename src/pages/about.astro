@@ -1,21 +1,20 @@
 ---
 // Import the layout
 import Layout from "../layouts/Layout.astro";
+import droneImage from "../images/drone.jpg";
 ---
 
-<Layout title="Page Title - Community Allotment">
-  <!-- Hero Section (Optional) -->
-  <!-- <section class="hero">
+<Layout title="About - Frodsham Townfield Allotments">
+  <!-- MAIN CONTENT SECTION -->
+  <section
+    class="hero"
+    style="background: linear-gradient(135deg, var(--color-neutral) 0%, var(--color-accent-light) 100%);"
+  >
     <div class="container">
-      <h1>About Frodsham Townfield Allotments</h1>
-      <!-- <p>Brief description or subtitle</p> -->
-
-
-
-  <!-- Main Content Section -->
-  <section class="content-section">
-    <div class="container">
-      <h2>About Frodsham Townfield Allotments</h2>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="color: var(--color-primary); text-align: center; margin-bottom: var(--spacing-xl);">
+          About Frodsham Townfield Allotments
+        </h2>
       <p>
         Advice is always forthcoming from others on the plots and even if it is
         sometimes contradictory it is always right! The inevitable gluts of
@@ -31,19 +30,31 @@ import Layout from "../layouts/Layout.astro";
         traditional rows of vegetables.
       </p>
 
-      <p>
-        Even if you have never grown anything before, why not give it a try? If
-        it seems a bit daunting, how about teaming up with someone to share a
-        plot? Other plotholders will be happy to give advice and a bit of help
-        if needed. Spare seeds, plug plants and cuttings are often on offer to
-        help get started.
-      </p>
+        <p>
+          Even if you have never grown anything before, why not give it a try? If
+          it seems a bit daunting, how about teaming up with someone to share a
+          plot? Other plotholders will be happy to give advice and a bit of help
+          if needed. Spare seeds, plug plants and cuttings are often on offer to
+          help get started.
+        </p>
+      </div>
+      <div style="text-align: center;">
+        <img
+          src={droneImage.src}
+          alt="Frodsham Townfield Allotments aerial view"
+          style="max-width: 100%; height: auto; border-radius: var(--radius-lg);"
+        />
+      </div>
     </div>
   </section>
 
-  <section class="content-section">
+  <!-- HISTORY SECTION -->
+  <section style="background-color: var(--color-neutral); padding: var(--spacing-2xl) 0;">
     <div class="container">
-      <h2>A Brief History of AFTA</h2>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="color: var(--color-primary); text-align: center; margin-bottom: var(--spacing-xl);">
+          A Brief History of AFTA
+        </h2>
       <p>
         The site opened at Easter 2011 on what had previously been a farm field.
         Initially the plots were marked out with pegs and string and from that
@@ -80,54 +91,83 @@ import Layout from "../layouts/Layout.astro";
         The Association now has a membership of over 90 and is affiliated to the
         National Allotment Association. The site has expanded from 30 plots to
         over 80 plots, plus the Good Shed NHS plot, and a Bee apiary.
-      </p>
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- Grid Section (Optional) -->
-  <section class="content-section">
+  <!-- ACTIVITIES SECTION -->
+  <section style="background-color: #ffffff; padding: var(--spacing-2xl) 0;">
     <div class="container">
-      <h2>Things We Do</h2>
-      <div class="grid">
-        <div class="card">
-          <p>
+      <h2 style="color: var(--color-primary); text-align: center; margin-bottom: var(--spacing-xl);">
+        Things We Do
+      </h2>
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-lg);"
+      >
+        <div
+          class="card"
+          style="border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);"
+        >
+          <p style="color: var(--color-text); margin: 0; line-height: 1.7;">
             Raising the profile of the allotments locally by publicity and
             adverts
           </p>
         </div>
-        <div class="card">
-          <p>
+        <div
+          class="card"
+          style="border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);"
+        >
+          <p style="color: var(--color-text); margin: 0; line-height: 1.7;">
             Contact with and working with other groups locally and in related
             areas like the garden club and the Town council allotments
           </p>
         </div>
-        <div class="card">
-          <p>
+        <div
+          class="card"
+          style="border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);"
+        >
+          <p style="color: var(--color-text); margin: 0; line-height: 1.7;">
             Building contacts with local and County Council, Community Police,
             Frodsham Transition Initiative and members of the local community.
             Local councillors and the MP have all been on site visits to see
             what has been achieved at the site
           </p>
         </div>
-        <div class="card">
-          <p>Stall at the Frodsham Community event</p>
+        <div
+          class="card"
+          style="border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);"
+        >
+          <p style="color: var(--color-text); margin: 0; line-height: 1.7;">Stall at the Frodsham Community event</p>
         </div>
-        <div class="card">
-          <p>
+        <div
+          class="card"
+          style="border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);"
+        >
+          <p style="color: var(--color-text); margin: 0; line-height: 1.7;">
             Exploring collaborative events and funding opportunities, contact
             with other local allotment associations (Kingsley)
           </p>
         </div>
-        <div class="card">
-          <p>Site visits from the NW region of the National Association</p>
+        <div
+          class="card"
+          style="border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);"
+        >
+          <p style="color: var(--color-text); margin: 0; line-height: 1.7;">Site visits from the NW region of the National Association</p>
         </div>
-        <div class="card">
-          <p>
+        <div
+          class="card"
+          style="border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);"
+        >
+          <p style="color: var(--color-text); margin: 0; line-height: 1.7;">
             We are working on plans to improve composting facilities at the site
           </p>
         </div>
-        <div class="card">
-          <p>
+        <div
+          class="card"
+          style="border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);"
+        >
+          <p style="color: var(--color-text); margin: 0; line-height: 1.7;">
             We are raising funds to help with provision of a composting toilet
             and communal hut
           </p>
@@ -135,115 +175,45 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </div>
   </section>
+
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+    }
+
+    .card {
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 var(--spacing-md);
+      }
+
+      h2 {
+        font-size: 1.75rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 var(--spacing-sm);
+      }
+
+      div[style*="display: flex"] {
+        flex-direction: column !important;
+      }
+
+      div[style*="display: flex"] a {
+        width: 100% !important;
+      }
+    }
+  </style>
 </Layout>
-
-<style>
-  .hero {
-    background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
-    padding: var(--spacing-2xl) 0;
-    text-align: center;
-  }
-
-  .hero h1 {
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .hero p {
-    font-size: 1.1rem;
-    color: var(--color-text);
-  }
-
-  .content-section {
-    padding: var(--spacing-2xl) 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .content-section:last-of-type {
-    border-bottom: none;
-  }
-
-  .content-section h2 {
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-lg);
-    text-align: center;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-xl);
-  }
-
-  .card {
-    background: #ffffff;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    transition: var(--transition);
-  }
-
-  .card:hover {
-    border-color: var(--color-accent-light);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  }
-
-  .card h3 {
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .card p {
-    color: var(--color-text);
-    margin: 0;
-  }
-
-  .cta-section {
-    background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
-    padding: var(--spacing-2xl) 0;
-    text-align: center;
-  }
-
-  .cta-section h2 {
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .cta-section p {
-    color: var(--color-text);
-    margin-bottom: var(--spacing-lg);
-    font-size: 1.1rem;
-  }
-
-  .btn-primary {
-    display: inline-block;
-    background-color: var(--color-accent);
-    color: white;
-    padding: var(--spacing-md) var(--spacing-xl);
-    border-radius: var(--radius-lg);
-    text-decoration: none;
-    font-weight: 600;
-    transition: var(--transition);
-  }
-
-  .btn-primary:hover {
-    background-color: var(--color-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(127, 166, 109, 0.2);
-  }
-
-  @media (max-width: 768px) {
-    .hero {
-      padding: var(--spacing-xl) 0;
-    }
-
-    .content-section {
-      padding: var(--spacing-xl) 0;
-    }
-
-    .grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

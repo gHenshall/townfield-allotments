@@ -1,8 +1,7 @@
 ---
 // Import the layout
 import Layout from "../layouts/Layout.astro";
-import droneImage from "../images/drone.jpg";
-import welcomeImage from "../images/welcome.jpg";
+import welcome from "../images/welcome.jpg";
 
 import "swiper/css";
 import "swiper/css/autoplay";
@@ -10,216 +9,162 @@ import "swiper/css/autoplay";
 import { register } from "swiper/element/bundle";
 
 register();
-
-const images = [droneImage, welcomeImage];
 ---
 
-<Layout title="Page Title - Community Allotment">
-  <!-- Hero Section (Optional) -->
-  <section class="hero">
+<Layout title="Frodsham Townfield Allotments | Growing Together">
+    <section
+    class="hero"
+    style="background: linear-gradient(135deg, var(--color-neutral) 0%, var(--color-accent-light) 100%);"
+  >
     <div class="container">
-      <h1>Welome to Frodsham Townfield Allotments</h1>
-
-      <img
-        src={droneImage.src}
-        alt="Frodsham Townfield Allotments"
-        style="max-width: 100%; height: auto;"
-      />
+      <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="color: var(--color-primary); text-align: center; margin-bottom: var(--spacing-xl);">
+          Welcome to Frodsham Townfield Allotments
+        </h2>
+      <p style="color: var(--color-text); font-size: 1.1rem; text-align: center; line-height: 1.8; max-width: 700px; margin: 0 auto; margin-bottom: var(--spacing-xl);">
+        A thriving community of gardeners growing together
+      </p>
+      </div>
+      <div style="text-align: center;">
+        <img
+          src={welcome.src}
+          alt="Frodsham Townfield Allotments aerial view"
+          style="max-width: 100%; height: auto; border-radius: var(--radius-lg);"
+        />
+      </div>
+    </div>
+  </section>
+  
+  <!-- UPCOMING EVENTS -->
+  <section style="background-color: #ffffff; padding: var(--spacing-2xl) 0;">
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <h2
+          style="color: var(--color-primary); text-align: center; margin-bottom: var(--spacing-xl);"
+        >
+          Allotment Open Day
+        </h2>
+        <p
+          style="color: var(--color-text); font-size: 1.1rem; text-align: center; margin-bottom: var(--spacing-lg); font-weight: 600;"
+        >
+          📅 Saturday 18th July 2026 • 12pm–3pm 📍 <a
+            href="/location"
+            class="nav-link">Townfield Lane, Frodsham</a
+          >
+        </p>
+        <p
+          style="color: var(--color-text); line-height: 1.8; margin-bottom: var(--spacing-md);"
+        >
+          Come along and discover the wonderful community at Frodsham Townfield
+          Allotments! Whether you're an experienced gardener, interested in
+          growing vegetables, or simply looking for a fun family day out,
+          everyone is welcome.
+        </p>
+        <p
+          style="color: var(--color-text); line-height: 1.8; margin-bottom: var(--spacing-md);"
+        >
+          Explore the allotments, meet local growers, and enjoy fresh fruit and
+          vegetables, homemade cakes, honey from our bees, BBQ & refreshments,
+          live music, children's crafts & activities, a scarecrow trail, raffle,
+          and more!
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- Main Content Section -->
-  <section class="content-section">
+  <!-- ABOUT ALLOTMENTS -->
+  <section
+    style="background-color: var(--color-neutral); padding: var(--spacing-2xl) 0;"
+  >
     <div class="container">
-      <h2>Allotment Open Day</h2>
-      <p>Saturday 18th July 2026 - 12-3pm</p>
-      <p>
-        Come along and discover the wonderful community at Frodsham Townfield
-        Allotments! Whether you're an experienced gardener, interested in
-        growing vegetables, or simply looking for a fun family day out, everyone
-        is welcome.
-      </p>
-      <p>
-        Explore the allotments, meet local growers, and enjoy a great afternoon
-        with fresh fruit and vegetables, homemade cakes, honey from the
-        allotment bees, BBQ & refreshments, live music, children's crafts &
-        activities, a scarecrow trail, raffle, and more!
-      </p>
-      <p>
-        Admission is free, come and join us for a relaxed and enjoyable
-        afternoon celebrating gardening, community, and local produce.
-      </p>
-      <p>
-        Free Entry – bring the whole family – We look forward to seeing you
-        there! 🌻🐝🥕
-      </p>
-      <p>📍 Townfield Lane, Frodsham, WA6 7LX</p>
-      <p>📅 Saturday 18th July 2026</p>
-      <p>⏰ 12pm–3pm</p>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <h2
+          style="color: var(--color-primary); text-align: center; margin-bottom: var(--spacing-xl);"
+        >
+          We Grow Together
+        </h2>
+        <p
+          style="color: var(--color-text); line-height: 1.8; margin-bottom: var(--spacing-lg);"
+        >
+          We use our plots for vegetable growing, keeping chickens and much more
+          – along the same lines as a traditional allotment. The half plot is
+          ideal for those squeezed for time, while a full plot is manageable for
+          starting out.
+        </p>
+        <p
+          style="color: var(--color-text); line-height: 1.8; margin-bottom: var(--spacing-lg);"
+        >
+          The plots are easily accessible in the field at the top of Langdale
+          Way on the junction with Townfield Lane. Grow Your Own is for everyone
+          these days! Nearly 50 plotholders of all ages – from families with
+          young children to pensioners – make this a truly inclusive community.
+        </p>
+        <p style="color: var(--color-text); line-height: 1.8;">
+          Frodsham Townfield Allotments are let by Atlantic Hardware. AFTA (The
+          Association of Frodsham Townfield Allotments) provides day-to-day
+          management and works to develop the site and community.
+        </p>
+      </div>
     </div>
   </section>
 
-  <section class="content-section">
+  <!-- WAITING LIST -->
+  <section style="background-color: #ffffff; padding: var(--spacing-2xl) 0;">
     <div class="container">
-      <h2>
-        We use our plots for vegetable growing and keeping chickens etc - along
-        the same lines as a traditional allotment
-      </h2>
-      <p>
-        We find the half plot is an ideal starter size for those of us squeezed
-        for time by work and family commitments. A full plot is still a
-        manageable size for a starting into allotments. Some have expanded by
-        adding extra half or full plots as they get more ambitious!
-      </p>
-      <p>
-        The plots are easily accessible in the field at the top of Langdale Way
-        on the junction with Town-field Lane, Frodsham WA6 7LX and are available
-        to all. Grow Your Own is for everyone these days - forget the old image
-        of allotments ! These days its often a family event. There are nearly 50
-        plotholders of all ages from families with young children to pensioners.
-      </p>
-      <p>
-        Frodsham Townfield Allotments are let by the land owners 'Atlantic
-        Hardware' who own the field. AFTA (The Association of Frodsham Townfield
-        Allotments) handles the letting of the plots and much of the maintenance
-        of the site on their behalf. There are more details of the Association's
-        role in our About page.
-      </p>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div
+          style="background-color: var(--color-neutral); padding: var(--spacing-lg); border-radius: var(--radius-lg); border-left: 4px solid var(--color-terracotta);"
+        >
+          <h2
+            style="color: var(--color-primary); margin-top: 0; margin-bottom: var(--spacing-md);"
+          >
+            Waiting List CLOSED
+          </h2>
+          <p
+            style="color: var(--color-text); line-height: 1.8; margin-bottom: var(--spacing-md);"
+          >
+            We receive an incredible number of enquiries from people hoping to
+            join our community. To manage this, we've decided to close our
+            waiting list to new enquiries for now.
+          </p>
+          <p style="color: var(--color-text); line-height: 1.8;">
+            Those already on the list will remain and will be contacted in order
+            when plots become available. We'll announce when we can reopen!
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="content-section">
-    <div class="container">
-      <h2>Waiting List CLOSED</h2>
-      <p>
-        We have had to come to a decision we’ve not wanted to make. The sheer
-        amount of enquiries we receive from people hoping to join our allotment
-        community is massive, and the monitoring of the list is tough on our
-        volunteers, so for now we have decided to close our waiting list to any
-        new enquiries
-      </p>
-      <p>
-        Those already on the list will remain, and will be contacted, in list
-        order, when plots do come available.
-      </p>
-      <p>
-        We will be sure to let you all know when the list has reached a level
-        where we can open it back up again!
-      </p>
-      <p>
-        Thank you for your understanding and we wish you all well with your
-        garden growing endeavours
-      </p>
-    </div>
-  </section>
   <style>
-    .hero {
-      background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
-      padding: var(--spacing-2xl) 0;
-      text-align: center;
-    }
-
-    .hero h1 {
-      color: var(--color-primary);
-      margin-bottom: var(--spacing-md);
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--color-text);
-    }
-
-    .content-section {
-      padding: var(--spacing-2xl) 0;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .content-section:last-of-type {
-      border-bottom: none;
-    }
-
-    .content-section h2 {
-      color: var(--color-primary);
-      margin-bottom: var(--spacing-lg);
-      text-align: center;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: var(--spacing-lg);
-      margin-top: var(--spacing-xl);
-    }
-
-    .card {
-      background: #ffffff;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-lg);
-      transition: var(--transition);
-    }
-
-    .card:hover {
-      border-color: var(--color-accent-light);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    }
-
-    .card h3 {
-      color: var(--color-primary);
-      margin-bottom: var(--spacing-md);
-    }
-
-    .card p {
-      color: var(--color-text);
-      margin: 0;
-    }
-
-    .cta-section {
-      background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
-      padding: var(--spacing-2xl) 0;
-      text-align: center;
-    }
-
-    .cta-section h2 {
-      color: var(--color-primary);
-      margin-bottom: var(--spacing-md);
-    }
-
-    .cta-section p {
-      color: var(--color-text);
-      margin-bottom: var(--spacing-lg);
-      font-size: 1.1rem;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      background-color: var(--color-accent);
-      color: white;
-      padding: var(--spacing-md) var(--spacing-xl);
-      border-radius: var(--radius-lg);
-      text-decoration: none;
-      font-weight: 600;
-      transition: var(--transition);
-    }
-
-    .btn-primary:hover {
-      background-color: var(--color-primary);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(127, 166, 109, 0.2);
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
     }
 
     @media (max-width: 768px) {
-      .hero {
-        padding: var(--spacing-xl) 0;
+      .container {
+        padding: 0 var(--spacing-md);
       }
 
-      .content-section {
-        padding: var(--spacing-xl) 0;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
+      h2 {
+        font-size: 1.75rem;
       }
     }
-  </style></Layout
->
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 var(--spacing-sm);
+      }
+
+      div[style*="display: flex"] {
+        flex-direction: column !important;
+      }
+
+      div[style*="display: flex"] a {
+        width: 100% !important;
+      }
+    }
+  </style>
+</Layout>
