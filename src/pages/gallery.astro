@@ -1,20 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-// Gallery configuration
-const galleryConfig = [
-  {
-    id: "july26",
-    title: "July On the Site",
-    description: "Photos from around the site. \nTaken by Hay, C11.",
-  },
-  {
-    id: "openday26",
-    title: "Allotment Open Day 2026",
-    description:
-      "A collection of highlights from our annual open day on July 18th 2026.",
-  },
-];
+// Import galleries data from JSON file
+import galleriesData from "../data/galleries-data.json";
+
+// Use the galleries from the data file instead of hardcoding
+const galleryConfig = galleriesData.galleries;
 
 // Dynamically load images from each gallery folder
 const imageModules = import.meta.glob("../images/*/*.{png,jpg,jpeg,gif,webp}", {

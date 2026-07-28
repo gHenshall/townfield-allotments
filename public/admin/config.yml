@@ -1,0 +1,46 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  # Gallery Configuration - NEW
+  - name: "galleries"
+    label: "Galleries"
+    description: "Manage your photo galleries"
+    files:
+      - name: "gallery_data"
+        label: "Gallery List"
+        file: "src/data/galleries.json"
+        format: "json"
+        fields:
+          - name: galleries
+            label: Galleries
+            widget: list
+            fields:
+              - {
+                  label: "Gallery ID",
+                  name: "id",
+                  widget: "string",
+                  hint: "Unique identifier (no spaces, lowercase). Example: july26, openday26",
+                }
+              - {
+                  label: "Gallery Title",
+                  name: "title",
+                  widget: "string",
+                  hint: "Display name. Example: July 2026",
+                }
+              - {
+                  label: "Description",
+                  name: "description",
+                  widget: "text",
+                  hint: "Short description of the gallery",
+                }
+              - {
+                  label: "Image Count",
+                  name: "imageCount",
+                  widget: "number",
+                  hint: "Auto-filled: number of images in this gallery folder",
+                }

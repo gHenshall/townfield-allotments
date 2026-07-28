@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import galleriesData from "../../data/galleries-data.json";
 
 interface Image {
   src: string;
@@ -9,18 +10,15 @@ interface Image {
 interface GalleryData {
   id: string;
   title: string;
+  description: string;
   images: Image[];
 }
 
-// Gallery configuration - define first
-const GALLERY_CONFIG = {
-  july26: "July 2026",
-  openday26: "Allotment Open Day 2026",
-};
-
-// Export static paths - hardcoded to match GALLERY_CONFIG keys
+// Get static paths from the galleries.json file
 export function getStaticPaths() {
-  return [{ params: { id: "july26" } }, { params: { id: "openday26" } }];
+  return galleriesData.galleries.map((gallery) => ({
+    params: { id: gallery.id },
+  }));
 }
 
 // Dynamic image imports
@@ -29,13 +27,13 @@ const imageModules = import.meta.glob(
   { eager: true },
 );
 
-// Build galleries from folder structure
+// Build galleries from folder structure using JSON config
 function buildGalleries() {
   const galleries: Record<string, GalleryData> = {};
 
-  Object.entries(GALLERY_CONFIG).forEach(([galleryId, galleryTitle]) => {
+  galleriesData.galleries.forEach((config) => {
     const galleryImages = Object.entries(imageModules)
-      .filter(([path]) => path.includes(`/images/${galleryId}/`))
+      .filter(([path]) => path.includes(`/images/${config.id}/`))
       .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
       .map(([path, module]: [string, any]) => {
         const filename =
@@ -49,9 +47,10 @@ function buildGalleries() {
         };
       });
 
-    galleries[galleryId] = {
-      id: galleryId,
-      title: galleryTitle,
+    galleries[config.id] = {
+      id: config.id,
+      title: config.title,
+      description: config.description,
       images: galleryImages,
     };
   });
@@ -65,7 +64,7 @@ const { id } = Astro.params;
 const gallery = allGalleries[id as keyof typeof allGalleries];
 
 if (!gallery) {
-  return Astro.redirect("/");
+  return Astro.redirect("/gallery");
 }
 ---
 
