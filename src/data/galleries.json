@@ -1,0 +1,10 @@
+{
+  "galleries": [
+    {
+      "id": "test",
+      "title": "testing my system",
+      "description": "some lovely photos of stuff",
+      "imageCount": 3
+    }
+  ]
+}
