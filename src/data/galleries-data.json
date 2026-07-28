@@ -9,6 +9,12 @@
       "id": "openday26",
       "title": "Allotment Open Day 2026",
       "description": "A collection of highlights from our annual open day on July 18th 2026."
+    },
+    {
+      "id": "tests",
+      "title": "testing my system",
+      "description": "some lovely photos of stuff",
+      "imageCount": 3
     }
   ]
 }

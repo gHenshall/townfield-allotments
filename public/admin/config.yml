@@ -14,7 +14,7 @@ collections:
     files:
       - name: "gallery_data"
         label: "Gallery List"
-        file: "src/data/galleries.json"
+        file: "src/data/galleries-data.json"
         format: "json"
         fields:
           - name: galleries
