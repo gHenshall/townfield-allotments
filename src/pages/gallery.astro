@@ -2,56 +2,78 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
-// Get all galleries from markdown files
+// Get all galleries and collections
 const allGalleries = await getCollection("galleries");
+const allCollections = await getCollection("collections");
 
-// For each gallery, auto-discover images from its folder
+// Create a map of collections
+const collectionsMap = new Map(
+  allCollections.map((col) => [col.data.slug, col]),
+);
+
+// Auto-discover images for each gallery
 const galleryData = await Promise.all(
   allGalleries.map(async (gallery) => {
     const galleryId = gallery.data.galleryId;
-    
-    // Dynamically import images from the gallery's folder
+
     const imageModules = import.meta.glob(
       "/public/images/galleries/**/*.{png,jpg,jpeg,gif,webp}",
-      { eager: true }
+      { eager: true },
     );
 
-    // Filter to only images in this gallery's folder
     const galleryImages = Object.entries(imageModules)
       .filter(([path]) => path.includes(`/images/galleries/${galleryId}/`))
-      .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
-      .map(([path, module]: [string, any]) => {
-        // Extract the relative path for the image
-        const relativePath = path.replace(/^\/public/, "");
-        return {
-          src: relativePath,
-          alt: path.split("/").pop()?.replace(/\.[^/.]+$/, "") || "image",
-        };
-      });
+      .sort(([pathA], [pathB]) => pathA.localeCompare(pathB));
 
     return {
       ...gallery,
-      images: galleryImages,
       imageCount: galleryImages.length,
+      collection: gallery.data.collectionId
+        ? collectionsMap.get(gallery.data.collectionId)
+        : null,
     };
-  })
+  }),
 );
 
-// Sort by featured first, then by date
+// Filter to only galleries with images and sort by featured
 const galleries = galleryData
-  .filter((g) => g.images.length > 0) // Only show galleries with images
+  .filter((g) => g.imageCount > 0)
   .sort((a, b) => {
     if (a.data.featured && !b.data.featured) return -1;
     if (!a.data.featured && b.data.featured) return 1;
     return 0;
   });
 
+// Featured galleries (not in a collection, or in featured collection)
 const featuredGalleries = galleries.filter((g) => g.data.featured);
-const regularGalleries = galleries.filter((g) => !g.data.featured);
+
+// Group galleries by collection
+const gallerysByCollection: Record<string, typeof galleries> = {};
+const galleriesWithoutCollection = galleries.filter(
+  (g) => !g.data.collectionId,
+);
+
+galleries.forEach((gallery) => {
+  if (gallery.data.collectionId) {
+    if (!gallerysByCollection[gallery.data.collectionId]) {
+      gallerysByCollection[gallery.data.collectionId] = [];
+    }
+    gallerysByCollection[gallery.data.collectionId].push(gallery);
+  }
+});
+
+// Sort collections
+const sortedCollectionIds = Object.keys(gallerysByCollection).sort((a, b) => {
+  const collA = collectionsMap.get(a);
+  const collB = collectionsMap.get(b);
+  if (collA?.data.featured && !collB?.data.featured) return -1;
+  if (!collA?.data.featured && collB?.data.featured) return 1;
+  return collA?.data.title.localeCompare(collB?.data.title || "") || 0;
+});
 ---
 
 <Layout title="Gallery - Frodsham Townfield Allotments">
-  <!-- GALLERY GRID -->
+  <!-- GALLERY SECTION -->
   <section
     style="background-color: var(--color-neutral); padding: var(--spacing-2xl) 0;"
   >
@@ -62,16 +84,14 @@ const regularGalleries = galleries.filter((g) => !g.data.featured);
         Photo Collections
       </h2>
 
-      <!-- Featured Galleries -->
+      {/* Featured Galleries */}
       {
         featuredGalleries.length > 0 && (
           <div style="margin-bottom: var(--spacing-2xl);">
             <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-lg);">
               Featured
             </h3>
-            <div
-              style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-xl);"
-            >
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-xl);">
               {featuredGalleries.map((gallery) => (
                 <a
                   href={`/gallery/${gallery.data.slug}`}
@@ -94,9 +114,7 @@ const regularGalleries = galleries.filter((g) => !g.data.featured);
                     <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm); margin-top: 0;">
                       {gallery.data.title}
                     </h3>
-                    <p
-                      style="color: var(--color-text); margin: 0; line-height: 1.6; font-size: 0.95rem;"
-                    >
+                    <p style="color: var(--color-text); margin: 0; line-height: 1.6; font-size: 0.95rem;">
                       {gallery.data.description}
                     </p>
                   </div>
@@ -107,53 +125,109 @@ const regularGalleries = galleries.filter((g) => !g.data.featured);
         )
       }
 
-      <!-- All Galleries -->
+      {/* Galleries by Collection */}
       {
-        galleries.length > 0 ? (
-          <div
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg);"
-          >
-            {regularGalleries.map((gallery) => (
-              <a
-                href={`/gallery/${gallery.data.slug}`}
-                class="gallery-card"
-                style="text-decoration: none; display: block; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent);"
-              >
-                <div style="position: relative; overflow: hidden; height: 300px; background: linear-gradient(135deg, var(--color-neutral) 0%, var(--color-accent-light) 100%);">
-                  <img
-                    src={gallery.data.coverImage}
-                    alt={gallery.data.title}
-                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
-                  />
-                  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
-                    <span style="color: white; font-weight: 600; font-size: 1.1rem;">
-                      View ({gallery.imageCount} photos)
-                    </span>
-                  </div>
-                </div>
-                <div style="padding: var(--spacing-lg); background-color: white;">
-                  <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm); margin-top: 0;">
-                    {gallery.data.title}
-                  </h3>
-                  <p
-                    style="color: var(--color-text); margin: 0; line-height: 1.6; font-size: 0.95rem;"
+        sortedCollectionIds.map((collectionId) => {
+          const collection = collectionsMap.get(collectionId);
+          const collectionGalleries = gallerysByCollection[collectionId].filter(
+            (g) => !g.data.featured,
+          );
+
+          return (
+            <div style="margin-bottom: var(--spacing-2xl);">
+              <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-lg);">
+                {collection?.data.title}
+              </h3>
+              {collection?.data.description && (
+                <p style="color: var(--color-text); margin-bottom: var(--spacing-lg); font-size: 0.95rem;">
+                  {collection.data.description}
+                </p>
+              )}
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-xl);">
+                {collectionGalleries.map((gallery) => (
+                  <a
+                    href={`/gallery/${gallery.data.slug}`}
+                    class="gallery-card"
+                    style="text-decoration: none; display: block; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent);"
                   >
-                    {gallery.data.description}
-                  </p>
-                </div>
-              </a>
-            ))}
+                    <div style="position: relative; overflow: hidden; height: 300px; background: linear-gradient(135deg, var(--color-neutral) 0%, var(--color-accent-light) 100%);">
+                      <img
+                        src={gallery.data.coverImage}
+                        alt={gallery.data.title}
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
+                      />
+                      <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+                        <span style="color: white; font-weight: 600; font-size: 1.1rem;">
+                          View ({gallery.imageCount} photos)
+                        </span>
+                      </div>
+                    </div>
+                    <div style="padding: var(--spacing-lg); background-color: white;">
+                      <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm); margin-top: 0;">
+                        {gallery.data.title}
+                      </h3>
+                      <p style="color: var(--color-text); margin: 0; line-height: 1.6; font-size: 0.95rem;">
+                        {gallery.data.description}
+                      </p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          );
+        })
+      }
+
+      {/* Galleries without collection */}
+      {
+        galleriesWithoutCollection.length > 0 && (
+          <div>
+            <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-lg);">
+              Other Photos
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg);">
+              {galleriesWithoutCollection.map((gallery) => (
+                <a
+                  href={`/gallery/${gallery.data.slug}`}
+                  class="gallery-card"
+                  style="text-decoration: none; display: block; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent);"
+                >
+                  <div style="position: relative; overflow: hidden; height: 300px; background: linear-gradient(135deg, var(--color-neutral) 0%, var(--color-accent-light) 100%);">
+                    <img
+                      src={gallery.data.coverImage}
+                      alt={gallery.data.title}
+                      style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
+                    />
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+                      <span style="color: white; font-weight: 600; font-size: 1.1rem;">
+                        View ({gallery.imageCount} photos)
+                      </span>
+                    </div>
+                  </div>
+                  <div style="padding: var(--spacing-lg); background-color: white;">
+                    <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm); margin-top: 0;">
+                      {gallery.data.title}
+                    </h3>
+                    <p style="color: var(--color-text); margin: 0; line-height: 1.6; font-size: 0.95rem;">
+                      {gallery.data.description}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
-        ) : (
-          <div
-            style="text-align: center; padding: var(--spacing-2xl); background: white; border-radius: var(--radius-lg);"
-          >
+        )
+      }
+
+      {
+        galleries.length === 0 && (
+          <div style="text-align: center; padding: var(--spacing-2xl); background: white; border-radius: var(--radius-lg);">
             <p style="color: var(--color-text);">
-              No galleries yet. Upload images to{" "}
+              No galleries yet. Add photos to{" "}
               <code style="background: #f0f0f0; padding: 2px 6px; border-radius: 4px;">
-                /images/galleries/[gallery-id]/
+                src/images/galleries/[gallery-id]/
               </code>
-              , then create a gallery entry in the CMS.
+              , then create gallery entries in the CMS.
             </p>
           </div>
         )
