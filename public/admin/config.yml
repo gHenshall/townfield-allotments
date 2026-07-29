@@ -3,45 +3,59 @@ backend:
   branch: main
   base_url: https://townfield-allotments.netlify.app/admin
 
-media_folder: "public/images"
-public_folder: "/images"
+media_folder: "public/images/galleries"
+public_folder: "/images/galleries"
 
 collections:
-  # Gallery Configuration - NEW
+  # Gallery Collection - NEW APPROACH
   - name: "galleries"
     label: "Galleries"
     description: "Manage your photo galleries"
-    files:
-      - name: "gallery_data"
-        label: "Gallery List"
-        file: "src/data/galleries-data.json"
-        format: "json"
+    folder: "src/content/galleries"
+    create: true
+    format: "yaml-frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - {
+          label: "Gallery Title",
+          name: "title",
+          widget: "string",
+          required: true,
+        }
+      - {
+          label: "Description",
+          name: "description",
+          widget: "text",
+          required: true,
+        }
+      - {
+          label: "Gallery Slug (URL)",
+          name: "slug",
+          widget: "string",
+          required: true,
+          hint: "Used in URL - lowercase, no spaces, e.g. autumn-harvest",
+        }
+      - {
+          label: "Featured",
+          name: "featured",
+          widget: "boolean",
+          default: false,
+        }
+      - {
+          label: "Cover Image",
+          name: "coverImage",
+          widget: "image",
+          required: true,
+          hint: "Main image for gallery card",
+        }
+      - label: "Gallery Images"
+        name: "images"
+        widget: "list"
         fields:
-          - name: galleries
-            label: Galleries
-            widget: list
-            fields:
-              - {
-                  label: "Gallery ID",
-                  name: "id",
-                  widget: "string",
-                  hint: "Unique identifier (no spaces, lowercase). Example: july26, openday26",
-                }
-              - {
-                  label: "Gallery Title",
-                  name: "title",
-                  widget: "string",
-                  hint: "Display name. Example: July 2026",
-                }
-              - {
-                  label: "Description",
-                  name: "description",
-                  widget: "text",
-                  hint: "Short description of the gallery",
-                }
-              - {
-                  label: "Image Count",
-                  name: "imageCount",
-                  widget: "number",
-                  hint: "Auto-filled: number of images in this gallery folder",
-                }
+          - { label: "Photo", name: "url", widget: "image", required: true }
+          - {
+              label: "Photo Caption",
+              name: "caption",
+              widget: "string",
+              required: false,
+            }

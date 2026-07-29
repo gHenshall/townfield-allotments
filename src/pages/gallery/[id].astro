@@ -1,78 +1,25 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import galleriesData from "../../data/galleries-data.json";
+import { getCollection } from "astro:content";
 
-interface Image {
-  src: string;
-  alt: string;
-}
-
-interface GalleryData {
-  id: string;
-  title: string;
-  description: string;
-  images: Image[];
-}
-
-// Get static paths from the galleries.json file
-export function getStaticPaths() {
-  return galleriesData.galleries.map((gallery) => ({
-    params: { id: gallery.id },
+export async function getStaticPaths() {
+  const galleries = await getCollection("galleries");
+  return galleries.map((gallery) => ({
+    params: { slug: gallery.data.slug },
+    props: { gallery },
   }));
 }
 
-// Dynamic image imports
-const imageModules = import.meta.glob(
-  "../../images/*/*.{png,jpg,jpeg,gif,webp}",
-  { eager: true },
-);
-
-// Build galleries from folder structure using JSON config
-function buildGalleries() {
-  const galleries: Record<string, GalleryData> = {};
-
-  galleriesData.galleries.forEach((config) => {
-    const galleryImages = Object.entries(imageModules)
-      .filter(([path]) => path.includes(`/images/${config.id}/`))
-      .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
-      .map(([path, module]: [string, any]) => {
-        const filename =
-          path
-            .split("/")
-            .pop()
-            ?.replace(/\.[^/.]+$/, "") || "image";
-        return {
-          src: module.default,
-          alt: filename.replace(/[-_]/g, " "),
-        };
-      });
-
-    galleries[config.id] = {
-      id: config.id,
-      title: config.title,
-      description: config.description,
-      images: galleryImages,
-    };
-  });
-
-  return galleries;
-}
-
-const allGalleries = buildGalleries();
-
-const { id } = Astro.params;
-const gallery = allGalleries[id as keyof typeof allGalleries];
-
-if (!gallery) {
-  return Astro.redirect("/gallery");
-}
+const { gallery } = Astro.props;
+const { title, description, images } = gallery.data;
 ---
 
-<Layout title={`${gallery.title} - Frodsham Townfield Allotments`}>
+<Layout title={`${title} - Frodsham Townfield Allotments`}>
   <div class="hero">
     <div class="hero-header">
       <a href="/gallery" class="back-link">← Back to Collections</a>
-      <h1>{gallery.title}</h1>
+      <h1>{title}</h1>
+      <p style="color: var(--color-text); margin: 0;">{description}</p>
     </div>
   </div>
 
@@ -80,9 +27,12 @@ if (!gallery) {
     <div class="container">
       <div class="gallery-grid" id="gallery">
         {
-          gallery.images.map((image, index) => (
+          images.map((image, index) => (
             <div class="gallery-item" data-index={index}>
-              <img src={image.src.src} alt={image.alt} />
+              <img
+                src={image.url}
+                alt={image.caption || `Photo ${index + 1}`}
+              />
               <div class="gallery-item-overlay">
                 <div class="overlay-icon">🔍</div>
               </div>
@@ -153,6 +103,12 @@ if (!gallery) {
 
     .content-section {
       padding: var(--spacing-2xl) 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
     }
 
     .gallery-grid {
