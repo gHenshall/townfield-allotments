@@ -15,15 +15,15 @@ const { title, description, folderId } = gallery.data;
 
 // Load all images from the gallery folder
 const imageModules = import.meta.glob(
-  "/public/images/**/*.{png,jpg,jpeg,gif,webp}",
+  "/src/images/**/*.{png,jpg,jpeg,gif,webp}",
   { eager: true },
 );
 
 const images = Object.entries(imageModules)
-  .filter(([path]) => path.includes(`/public/images/${folderId}/`))
+  .filter(([path]) => path.includes(`/src/images/${folderId}/`))
   .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
   .map(([path]) => ({
-    src: path.replace(/^\/public/, ""), // Convert /public/images/tests/001.jpg to /images/tests/001.jpg
+    src: path.replace(/^\/src/, ""), // Convert /src/images/tests/001.jpg to /images/tests/001.jpg
     alt:
       path
         .split("/")
