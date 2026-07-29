@@ -156,43 +156,54 @@ const images = Object.entries(imageModules)
     const lightboxImg = document.getElementById("lightbox-img");
     const counter = document.getElementById("lightbox-counter");
 
-    function openLightbox(el) {
-      currentIndex = parseInt(el.dataset.index);
+    // Make functions globally available
+    window.openLightbox = function (el) {
+      if (!el || !el.dataset) return;
+      currentIndex = parseInt(el.dataset.index) || 0;
       updateLightbox();
       lightbox.style.display = "flex";
       document.body.style.overflow = "hidden";
-    }
+    };
 
-    function closeLightbox() {
+    window.closeLightbox = function () {
       lightbox.style.display = "none";
       document.body.style.overflow = "";
-    }
+    };
+
+    window.nextImage = function () {
+      if (images.length === 0) return;
+      currentIndex = (currentIndex + 1) % images.length;
+      updateLightbox();
+    };
+
+    window.prevImage = function () {
+      if (images.length === 0) return;
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateLightbox();
+    };
 
     function updateLightbox() {
+      if (!images[currentIndex]) return;
       lightboxImg.src = images[currentIndex].src;
-      lightboxImg.alt = images[currentIndex].alt;
+      lightboxImg.alt = images[currentIndex].alt || "photo";
       counter.textContent = `${currentIndex + 1} / ${images.length}`;
     }
 
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % images.length;
-      updateLightbox();
+    // Close lightbox when clicking outside image
+    if (lightbox) {
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          window.closeLightbox();
+        }
+      });
     }
 
-    function prevImage() {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      updateLightbox();
-    }
-
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-
+    // Keyboard navigation
     document.addEventListener("keydown", (e) => {
-      if (lightbox.style.display !== "flex") return;
-      if (e.key === "ArrowRight") nextImage();
-      if (e.key === "ArrowLeft") prevImage();
-      if (e.key === "Escape") closeLightbox();
+      if (!lightbox || lightbox.style.display !== "flex") return;
+      if (e.key === "ArrowRight") window.nextImage();
+      if (e.key === "ArrowLeft") window.prevImage();
+      if (e.key === "Escape") window.closeLightbox();
     });
   </script>
 </Layout>
