@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 export async function getStaticPaths() {
   const galleries = await getCollection("galleries");
   return galleries.map((gallery) => ({
-    params: { id: gallery.data.slug }, // id parameter (matches filename [id])
+    params: { id: gallery.data.slug },
     props: { gallery },
   }));
 }
@@ -14,23 +14,25 @@ const { gallery } = Astro.props;
 const { title, description, galleryId } = gallery.data;
 
 // Auto-discover images from the gallery's folder
+// Look in src/images/[galleryId]/ NOT src/images/galleries/[galleryId]/
 const imageModules = import.meta.glob(
-  "/public/images/**/*.{png,jpg,jpeg,gif,webp}",
+  "/src/images/**/*.{png,jpg,jpeg,gif,webp}",
   { eager: true },
 );
 
 const images = Object.entries(imageModules)
-  .filter(([path]) => path.includes(`/images/${galleryId}/`))
+  .filter(([path]) => path.includes(`/src/images/${galleryId}/`))
   .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
   .map(([path, module]: [string, any]) => {
-    const relativePath = path.replace(/^\/public/, "");
+    // Convert src path to public path for display
+    const publicPath = path.replace(/^\/src\/images\//, "/images/");
     const filename =
       path
         .split("/")
         .pop()
         ?.replace(/\.[^/.]+$/, "") || "image";
     return {
-      src: relativePath,
+      src: publicPath,
       alt: filename.replace(/[-_]/g, " "),
     };
   });
@@ -62,8 +64,7 @@ const images = Object.entries(imageModules)
         ) : (
           <div style="text-align: center; padding: var(--spacing-2xl); background: white; border-radius: var(--radius-lg);">
             <p style="color: var(--color-text);">
-              No images found in folder:{" "}
-              <code>/images/galleries/{galleryId}/</code>
+              No images found in folder: <code>/src/images/{galleryId}/</code>
             </p>
           </div>
         )

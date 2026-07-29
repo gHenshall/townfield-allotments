@@ -16,13 +16,14 @@ const galleryData = await Promise.all(
   allGalleries.map(async (gallery) => {
     const galleryId = gallery.data.galleryId;
 
+    // Look for images in src/images/[galleryId]/ (NOT src/images/galleries/)
     const imageModules = import.meta.glob(
-      "/public/images/**/*.{png,jpg,jpeg,gif,webp}",
+      "/src/images/**/*.{png,jpg,jpeg,gif,webp}",
       { eager: true },
     );
 
     const galleryImages = Object.entries(imageModules)
-      .filter(([path]) => path.includes(`/images/${galleryId}/`))
+      .filter(([path]) => path.includes(`/src/images/${galleryId}/`))
       .sort(([pathA], [pathB]) => pathA.localeCompare(pathB));
 
     return {
