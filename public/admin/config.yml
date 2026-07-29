@@ -3,52 +3,9 @@ backend:
   branch: main
   base_url: https://townfield-allotments.netlify.app/admin
 
-media_folder: "public/images"
-public_folder: "/images"
-
 collections:
-  # Gallery Collections - Organize galleries into categories
-  - name: "galleryCollections"
-    label: "Gallery Collections"
-    description: "Organize your galleries into collections (e.g., 'Summer Events', 'Harvests', 'Members')"
-    folder: "src/content/collections"
-    create: true
-    format: "yaml-frontmatter"
-    slug: "{{slug}}"
-    fields:
-      - {
-          label: "Collection Name",
-          name: "title",
-          widget: "string",
-          required: true,
-          hint: "e.g., Summer Events, Member Spotlights, Monthly Highlights",
-        }
-      - {
-          label: "Collection Slug",
-          name: "slug",
-          widget: "string",
-          required: true,
-          hint: "Used in URL - lowercase, no spaces (e.g., summer-events)",
-        }
-      - {
-          label: "Description",
-          name: "description",
-          widget: "text",
-          required: false,
-          hint: "What this collection is about",
-        }
-      - {
-          label: "Featured",
-          name: "featured",
-          widget: "boolean",
-          default: false,
-          hint: "Show this collection prominently",
-        }
-
-  # Gallery Collection - Individual galleries
   - name: "galleries"
     label: "Galleries"
-    description: "Individual photo galleries. Upload images to /src/images/[gallery-id]/ via Git, then create entry here."
     folder: "src/content/galleries"
     create: true
     format: "yaml-frontmatter"
@@ -67,39 +24,16 @@ collections:
           required: true,
         }
       - {
-          label: "Gallery ID",
-          name: "galleryId",
+          label: "Folder Name",
+          name: "folderId",
           widget: "string",
           required: true,
-          hint: "Folder name in /images/ where photos are stored",
+          hint: "Folder name in public/images/ where photos are stored (e.g., tests)",
         }
       - {
-          label: "Gallery Slug (URL)",
+          label: "URL Slug",
           name: "slug",
           widget: "string",
           required: true,
-          hint: "Used in URL",
-        }
-      - {
-          label: "Gallery Collection",
-          name: "collectionId",
-          widget: "relation",
-          collection: "galleryCollections",
-          search_fields: ["title"],
-          value_field: "slug",
-          display_fields: ["title"],
-          hint: "Which collection does this gallery belong to?",
-        }
-      - {
-          label: "Featured",
-          name: "featured",
-          widget: "boolean",
-          default: false,
-        }
-      - {
-          label: "Cover Image Path",
-          name: "coverImage",
-          widget: "string",
-          required: true,
-          hint: "e.g., /images/autumn-harvest/photo1.jpg",
+          hint: "URL slug (e.g., summer-photos)",
         }
