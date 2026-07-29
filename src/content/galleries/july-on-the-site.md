@@ -6,4 +6,5 @@ slug: tests
 collectionId: open-days
 featured: false
 coverImage: /images/tests/000.jpeg
+folderId: tests
 ---
