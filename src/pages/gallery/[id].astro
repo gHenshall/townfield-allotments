@@ -15,12 +15,12 @@ const { title, description, galleryId } = gallery.data;
 
 // Auto-discover images from the gallery's folder
 const imageModules = import.meta.glob(
-  "/public/images/galleries/**/*.{png,jpg,jpeg,gif,webp}",
+  "/public/images/**/*.{png,jpg,jpeg,gif,webp}",
   { eager: true },
 );
 
 const images = Object.entries(imageModules)
-  .filter(([path]) => path.includes(`/images/galleries/${galleryId}/`))
+  .filter(([path]) => path.includes(`/images/${galleryId}/`))
   .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
   .map(([path, module]: [string, any]) => {
     const relativePath = path.replace(/^\/public/, "");
