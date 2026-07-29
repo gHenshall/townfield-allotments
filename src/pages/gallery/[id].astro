@@ -11,7 +11,29 @@ export async function getStaticPaths() {
 }
 
 const { gallery } = Astro.props;
-const { title, description, images } = gallery.data;
+const { title, description, galleryId } = gallery.data;
+
+// Auto-discover images from the gallery's folder
+const imageModules = import.meta.glob(
+  "/public/images/galleries/**/*.{png,jpg,jpeg,gif,webp}",
+  { eager: true },
+);
+
+const images = Object.entries(imageModules)
+  .filter(([path]) => path.includes(`/images/galleries/${galleryId}/`))
+  .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
+  .map(([path, module]: [string, any]) => {
+    const relativePath = path.replace(/^\/public/, "");
+    const filename =
+      path
+        .split("/")
+        .pop()
+        ?.replace(/\.[^/.]+$/, "") || "image";
+    return {
+      src: relativePath,
+      alt: filename.replace(/[-_]/g, " "),
+    };
+  });
 ---
 
 <Layout title={`${title} - Frodsham Townfield Allotments`}>
@@ -25,21 +47,27 @@ const { title, description, images } = gallery.data;
 
   <div class="content-section">
     <div class="container">
-      <div class="gallery-grid" id="gallery">
-        {
-          images.map((image, index) => (
-            <div class="gallery-item" data-index={index}>
-              <img
-                src={image.url}
-                alt={image.caption || `Photo ${index + 1}`}
-              />
-              <div class="gallery-item-overlay">
-                <div class="overlay-icon">🔍</div>
+      {
+        images.length > 0 ? (
+          <div class="gallery-grid" id="gallery">
+            {images.map((image, index) => (
+              <div class="gallery-item" data-index={index}>
+                <img src={image.src} alt={image.alt} />
+                <div class="gallery-item-overlay">
+                  <div class="overlay-icon">🔍</div>
+                </div>
               </div>
-            </div>
-          ))
-        }
-      </div>
+            ))}
+          </div>
+        ) : (
+          <div style="text-align: center; padding: var(--spacing-2xl); background: white; border-radius: var(--radius-lg);">
+            <p style="color: var(--color-text);">
+              No images found in folder:{" "}
+              <code>/images/galleries/{galleryId}/</code>
+            </p>
+          </div>
+        )
+      }
     </div>
   </div>
 
@@ -444,6 +472,8 @@ const { title, description, images } = gallery.data;
       if (e.key === "Escape") closeLightbox();
     });
 
-    initGallery();
+    if (gallery) {
+      initGallery();
+    }
   </script>
 </Layout>
