@@ -24,7 +24,11 @@ const galleryData = await Promise.all(
 
     const galleryImages = Object.entries(imageModules)
       .filter(([path]) => path.includes(`/public/images/${galleryId}/`))
-      .sort(([pathA], [pathB]) => pathA.localeCompare(pathB));
+      .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
+      .map(([path, module]: [string, any]) => ({
+        path,
+        url: module.default || path,
+      }));
 
     return {
       ...gallery,

@@ -17,18 +17,22 @@ const { title, description, galleryId } = gallery.data;
 // Look in public/images/[galleryId]/
 const imageModules = import.meta.glob(
   "/public/images/**/*.{png,jpg,jpeg,gif,webp}",
-  { eager: true }
+  { eager: true },
 );
 
 const images = Object.entries(imageModules)
   .filter(([path]) => path.includes(`/public/images/${galleryId}/`))
   .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
   .map(([path, module]: [string, any]) => {
-    // Convert public path to display path (/images/...)
-    const displayPath = path.replace(/^\/public/, "");
-    const filename = path.split("/").pop()?.replace(/\.[^/.]+$/, "") || "image";
+    // module.default contains the correct image URL
+    const imageUrl = module.default || path.replace(/^\/public/, "");
+    const filename =
+      path
+        .split("/")
+        .pop()
+        ?.replace(/\.[^/.]+$/, "") || "image";
     return {
-      src: displayPath,
+      src: imageUrl,
       alt: filename.replace(/[-_]/g, " "),
     };
   });
@@ -58,11 +62,10 @@ const images = Object.entries(imageModules)
             ))}
           </div>
         ) : (
-          <div
-            style="text-align: center; padding: var(--spacing-2xl); background: white; border-radius: var(--radius-lg);"
-          >
+          <div style="text-align: center; padding: var(--spacing-2xl); background: white; border-radius: var(--radius-lg);">
             <p style="color: var(--color-text);">
-              No images found in folder: <code>/public/images/{galleryId}/</code>
+              No images found in folder:{" "}
+              <code>/public/images/{galleryId}/</code>
             </p>
           </div>
         )
