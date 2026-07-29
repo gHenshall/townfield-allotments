@@ -1,10 +1,10 @@
 ---
 title: July On the Site
-description: some lovely photos
+description: Photos from around the site.\nTaken by Hay, C11.
 galleryId: tests
-slug: tests
+slug: july-26
 collectionId: open-days
 featured: false
 coverImage: /images/tests/000.jpeg
-folderId: tests
+folderId: july26
 ---
