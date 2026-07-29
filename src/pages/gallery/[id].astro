@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 export async function getStaticPaths() {
   const galleries = await getCollection("galleries");
   return galleries.map((gallery) => ({
-    params: { slug: gallery.data.slug },
+    params: { id: gallery.data.slug }, // id parameter (matches filename [id])
     props: { gallery },
   }));
 }
