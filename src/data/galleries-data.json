@@ -1,6 +1,12 @@
 {
   "galleries": [
     {
+      "id": "tests",
+      "title": "testing my system",
+      "description": "some lovely photos of stuff",
+      "imageCount": 3
+    },
+    {
       "id": "july26",
       "title": "July On the Site",
       "description": "Photos from around the site.\nTaken by Hay, C11.",
