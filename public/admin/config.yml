@@ -14,7 +14,7 @@ media_library:
 collections:
   - name: "galleries"
     label: "Galleries"
-    folder: "public/content/galleries"
+    folder: "src/content/galleries"
     create: true
     format: "yaml-frontmatter"
     slug: "{{slug}}"
