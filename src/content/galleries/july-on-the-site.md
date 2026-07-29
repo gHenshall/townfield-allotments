@@ -1,6 +1,6 @@
 ---
 title: July On the Site
-description: Photos from around the site.\nTaken by Hay, C11.
+description: Photos from around the site. Taken by Hay, C11.
 galleryId: tests
 slug: july-26
 collectionId: open-days
