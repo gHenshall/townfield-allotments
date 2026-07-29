@@ -16,14 +16,14 @@ const galleryData = await Promise.all(
   allGalleries.map(async (gallery) => {
     const galleryId = gallery.data.galleryId;
 
-    // Look for images in src/images/[galleryId]/ (NOT src/images/galleries/)
+    // Look for images in public/images/[galleryId]/
     const imageModules = import.meta.glob(
-      "/src/images/**/*.{png,jpg,jpeg,gif,webp}",
+      "/public/images/**/*.{png,jpg,jpeg,gif,webp}",
       { eager: true },
     );
 
     const galleryImages = Object.entries(imageModules)
-      .filter(([path]) => path.includes(`/src/images/${galleryId}/`))
+      .filter(([path]) => path.includes(`/public/images/${galleryId}/`))
       .sort(([pathA], [pathB]) => pathA.localeCompare(pathB));
 
     return {
@@ -226,7 +226,7 @@ const sortedCollectionIds = Object.keys(gallerysByCollection).sort((a, b) => {
             <p style="color: var(--color-text);">
               No galleries yet. Add photos to{" "}
               <code style="background: #f0f0f0; padding: 2px 6px; border-radius: 4px;">
-                src/images/[gallery-id]/
+                public/images/[gallery-id]/
               </code>
               , then create gallery entries in the CMS.
             </p>
