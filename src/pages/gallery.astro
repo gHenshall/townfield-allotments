@@ -17,8 +17,8 @@ const galleryWithImages = await Promise.all(
 
     const images = Object.entries(imageModules)
       .filter(([path]) => path.includes(`/public/images/${folderId}/`))
-      .map(([path, module]: [string, any]) => ({
-        src: module.default || path.replace(/^\/public/, ""),
+      .map(([path]) => ({
+        src: path.replace(/^\/public/, ""), // Convert /public/images/tests/001.jpg to /images/tests/001.jpg
       }));
 
     return {
