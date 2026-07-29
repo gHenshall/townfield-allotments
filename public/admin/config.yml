@@ -3,6 +3,14 @@ backend:
   branch: main
   base_url: https://townfield-allotments.netlify.app/admin
 
+media_folder: "public/images"
+public_folder: "/images"
+
+media_library:
+  name: uploadcare
+  config:
+    publicKey: 12345
+
 collections:
   - name: "galleries"
     label: "Galleries"
@@ -11,29 +19,7 @@ collections:
     format: "yaml-frontmatter"
     slug: "{{slug}}"
     fields:
-      - {
-          label: "Gallery Title",
-          name: "title",
-          widget: "string",
-          required: true,
-        }
-      - {
-          label: "Description",
-          name: "description",
-          widget: "text",
-          required: true,
-        }
-      - {
-          label: "Folder Name",
-          name: "folderId",
-          widget: "string",
-          required: true,
-          hint: "Folder name in public/images/ where photos are stored (e.g., tests)",
-        }
-      - {
-          label: "URL Slug",
-          name: "slug",
-          widget: "string",
-          required: true,
-          hint: "URL slug (e.g., summer-photos)",
-        }
+      - { label: "Gallery Title", name: "title", widget: "string", required: true }
+      - { label: "Description", name: "description", widget: "text", required: true }
+      - { label: "Folder Name", name: "folderId", widget: "string", required: true, hint: "Folder name in public/images/ where photos are stored (e.g., tests)" }
+      - { label: "URL Slug", name: "slug", widget: "string", required: true, hint: "URL slug (e.g., summer-photos)" }
