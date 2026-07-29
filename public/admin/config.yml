@@ -26,6 +26,13 @@ collections:
           required: true,
         }
       - {
+          label: "Date Added",
+          name: "date",
+          widget: "datetime",
+          required: true,
+          hint: "When the photos were taken/added",
+        }
+      - {
           label: "Description",
           name: "description",
           widget: "text",
