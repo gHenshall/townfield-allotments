@@ -47,7 +47,7 @@ const displayGalleries = galleryWithImages
           {displayGalleries.map((gallery) => (
             <a
               href={`/gallery/${gallery.data.slug}`}
-              style="text-decoration: none; display: block; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent);"
+              style="text-decoration: none; display: block; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 2px solid var(--color-border); border-top: 4px solid var(--color-accent); background-color: white;"
               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='var(--shadow-md)'"
               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'"
             >
@@ -60,7 +60,7 @@ const displayGalleries = galleryWithImages
                   />
                 )}
               </div>
-              <div style="padding: var(--spacing-lg); background-color: white;">
+              <div style="padding: var(--spacing-lg);">
                 <h3 style="color: var(--color-primary); margin: 0 0 var(--spacing-sm) 0;">
                   {gallery.data.title}
                 </h3>
