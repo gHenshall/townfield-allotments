@@ -88,23 +88,55 @@ const { title, description = "Growing together" } = Astro.props;
     </footer>
 
     <script>
-      // Mobile menu toggle
-      const menuToggle = document.getElementById("menuToggle");
-      const navMenu = document.getElementById("navMenu");
+      // Mobile menu toggle - Enhanced for mobile reliability
+      function initializeMenu() {
+        const menuToggle = document.getElementById("menuToggle");
+        const navMenu = document.getElementById("navMenu");
 
-      menuToggle?.addEventListener("click", () => {
-        navMenu?.classList.toggle("active");
-        menuToggle.classList.toggle("active");
-      });
+        if (!menuToggle || !navMenu) {
+          console.warn("Menu elements not found");
+          return;
+        }
 
-      // Close menu when a link is clicked
-      const navLinks = document.querySelectorAll(".nav-link, .nav-facebook");
-      navLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          navMenu?.classList.remove("active");
-          menuToggle?.classList.remove("active");
+        // Toggle menu on hamburger click
+        menuToggle.addEventListener("click", (e) => {
+          e.preventDefault();
+          const isOpen = navMenu.classList.contains("active");
+          
+          if (isOpen) {
+            navMenu.classList.remove("active");
+            menuToggle.classList.remove("active");
+          } else {
+            navMenu.classList.add("active");
+            menuToggle.classList.add("active");
+          }
         });
-      });
+
+        // Close menu when a link is clicked
+        const navLinks = document.querySelectorAll(".nav-link, .nav-facebook");
+        navLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            navMenu.classList.remove("active");
+            menuToggle.classList.remove("active");
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", (e) => {
+          const isClickInside = navMenu.contains(e.target) || menuToggle.contains(e.target);
+          if (!isClickInside && navMenu.classList.contains("active")) {
+            navMenu.classList.remove("active");
+            menuToggle.classList.remove("active");
+          }
+        });
+      }
+
+      // Initialize menu when DOM is ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializeMenu);
+      } else {
+        initializeMenu();
+      }
     </script>
   </body>
 </html>
@@ -300,17 +332,18 @@ const { title, description = "Growing together" } = Astro.props;
       right: 0;
       flex-direction: column;
       gap: 1rem;
-      padding: 1.5rem;
+      padding: 0;
       background-color: var(--color-neutral);
       border-bottom: 2px solid var(--color-accent-light);
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* Show nav when active */
     .nav.active {
-      max-height: 500px;
+      padding: 1.5rem;
+      max-height: 600px;
     }
 
     .nav-link {
